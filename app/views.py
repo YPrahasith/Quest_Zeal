@@ -107,9 +107,6 @@ def login():
 @app.route('/<path>')
 def index(path):
 
-    #if not current_user.is_authenticated:
-    #    return redirect(url_for('login'))
-
     try:
 
         return render_template( 'index.html' )
