@@ -126,14 +126,17 @@ def studentDashboard():
 @app.route('/tutorDashboard', methods=['GET', 'POST'])
 @login_required
 def tutorDashboard():
+    name = current_user.user
+    if name=="admin" :
+        if request.method == 'POST':
+            uploaded_file = request.files['file']
+            if uploaded_file.filename != '':
+                uploaded_file.save(uploaded_file.filename)
+            return redirect(url_for('tutorDashboard'))
 
-    if request.method == 'POST':
-        uploaded_file = request.files['file']
-        if uploaded_file.filename != '':
-            uploaded_file.save(uploaded_file.filename)
-        return redirect(url_for('tutorDashboard'))
-
-    return render_template( 'tutorDashboard.html',name = current_user.user , email= current_user.email)
+        return render_template( 'tutorDashboard.html',name = name , email= current_user.email)
+    else :
+        return render_template('page-404.html'), 404
 
 # Return sitemap
 @app.route('/sitemap.xml')
