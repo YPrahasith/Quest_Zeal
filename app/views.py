@@ -95,9 +95,9 @@ def login():
             if bc.check_password_hash(user.password, password):
                 login_user(user)
                 if(username =="admin"):
-                    return redirect(url_for('studentDashboard'))
-                else :
                     return redirect(url_for('tutorDashboard'))
+                else :
+                    return redirect(url_for('studentDashboard'))
             else:
                 msg = "Wrong password. Please try again."
         else:
