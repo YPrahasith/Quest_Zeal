@@ -1,13 +1,15 @@
 <!doctype html>
 <html lang="en">
-<head>
-<title>Login</title>
 
-<!-- CSS only -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="/static/assets/css/custom.css">
+<head>
+    <title>Login</title>
+
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/assets/css/custom.css">
 
 </head>
+
 <body>
 
     <main>
@@ -30,10 +32,10 @@
 
                         <p class="fw-bold">
                             {% if msg %}
-                                {{ msg | safe }}
+                            {{ msg | safe }}
                             {% else %}
-                                Add your credentials
-                            {% endif %}                                  
+                            Add your credentials
+                            {% endif %}
                         </p>
 
                         <br />
@@ -67,6 +69,7 @@
 
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-      
+
 </body>
+
 </html>
