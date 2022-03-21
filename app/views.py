@@ -121,7 +121,10 @@ def index():
 @app.route('/studentDashboard')
 @login_required
 def studentDashboard():
-    return render_template( 'studentDashboard.html',name = current_user.user , email= current_user.email)
+    if current_user.user == "admin":
+        return render_template('page-404.html'), 404
+    else :
+        return render_template( 'studentDashboard.html',name = current_user.user , email= current_user.email)
 
 @app.route('/tutorDashboard', methods=['GET', 'POST'])
 @login_required
