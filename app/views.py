@@ -94,7 +94,10 @@ def login():
             
             if bc.check_password_hash(user.password, password):
                 login_user(user)
-                return redirect(url_for('index'))
+                if(username =="admin"):
+                    return redirect(url_for('studentDashboard'))
+                else :
+                    return redirect(url_for('tutorDashboard'))
             else:
                 msg = "Wrong password. Please try again."
         else:
@@ -103,9 +106,8 @@ def login():
     return render_template( 'login.html', form=form, msg=msg )
 
 # App main route + generic routing
-@app.route('/', defaults={'path': 'index'})
-@app.route('/<path>')
-def index(path):
+@app.route('/')
+def index():
 
     try:
 
@@ -114,8 +116,16 @@ def index(path):
     except TemplateNotFound:
         return render_template('page-404.html'), 404
     
-    except:
-        return render_template('page-500.html'), 500
+
+@app.route('/studentDashboard')
+@login_required
+def studentDashboard():
+    return render_template( 'studentDashboard.html',name = current_user.user , email= current_user.email)
+
+@app.route('/tutorDashboard')
+@login_required
+def tutorDashboard():
+    return render_template( 'tutorDashboard.html',name = current_user.user , email= current_user.email)
 
 # Return sitemap
 @app.route('/sitemap.xml')
