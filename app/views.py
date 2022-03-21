@@ -1,4 +1,5 @@
 # Python modules
+
 import os, logging 
 
 # Flask modules
@@ -122,9 +123,16 @@ def index():
 def studentDashboard():
     return render_template( 'studentDashboard.html',name = current_user.user , email= current_user.email)
 
-@app.route('/tutorDashboard')
+@app.route('/tutorDashboard', methods=['GET', 'POST'])
 @login_required
 def tutorDashboard():
+
+    if request.method == 'POST':
+        uploaded_file = request.files['file']
+        if uploaded_file.filename != '':
+            uploaded_file.save(uploaded_file.filename)
+        return redirect(url_for('tutorDashboard'))
+
     return render_template( 'tutorDashboard.html',name = current_user.user , email= current_user.email)
 
 # Return sitemap

@@ -25,6 +25,19 @@
                     Here's your {{email}}
                 </div>
                 <br />
+                <br />
+
+                <div>
+
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        <input type="file" name="file" accept=".txt">
+                        <br />
+                        <br />
+                        <input type="submit" value="Submit" onclick="msg()">
+                    </form>
+                </div>
+                <br />
+                <br />
 
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
 
@@ -37,6 +50,11 @@
 
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function msg() {
+            alert("File Uploaded Successfully!");
+        }  
+    </script>
 
 </body>
 
