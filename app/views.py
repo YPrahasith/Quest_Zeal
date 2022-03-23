@@ -1,18 +1,22 @@
 # Python modules
 
 import os, logging 
-
+import pickle
 # Flask modules
 from flask import render_template, request, url_for, redirect, send_from_directory
 from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.exceptions import HTTPException, NotFound, abort
 from jinja2 import TemplateNotFound
-
+from werkzeug.utils import secure_filename
 # App modules
 from app        import app, lm, db, bc
 from app.models import Users
 from app.forms  import LoginForm, RegisterForm
+from app.QA_Gen_Model import QA_Gen_Model
 
+# model = pickle.load(open('app/model.pkl','rb'))
+UPLOAD_FOLDER = 'Uploaded Material'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # provide login manager with load_user callback
 @lm.user_loader
 def load_user(user_id):
@@ -134,7 +138,8 @@ def tutorDashboard():
         if request.method == 'POST':
             uploaded_file = request.files['file']
             if uploaded_file.filename != '':
-                uploaded_file.save(uploaded_file.filename)
+                uploaded_file.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(uploaded_file.filename)))
+               
             return redirect(url_for('tutorDashboard'))
 
         return render_template( 'tutorDashboard.html',name = name , email= current_user.email)
@@ -145,3 +150,17 @@ def tutorDashboard():
 @app.route('/sitemap.xml')
 def sitemap():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'sitemap.xml')
+
+@app.route('/Question_Generation')
+def Question_Generation():
+    try:
+        with open('Uploaded Material/dbms.txt', 'r') as f:
+            content = f.read()
+    except:
+        return render_template('page-404.html'), 404
+        
+    que, ans = QA_Gen_Model.generate_test(content)
+    size = len(que)
+    return render_template('Question_Generation.html', content = content, question = que, answer = ans, size = size )
+   
+    
