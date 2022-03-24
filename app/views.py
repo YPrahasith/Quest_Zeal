@@ -152,6 +152,7 @@ def sitemap():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'sitemap.xml')
 
 @app.route('/Question_Generation')
+@login_required
 def Question_Generation():
     try:
         with open('Uploaded Material/dbms.txt', 'r') as f:

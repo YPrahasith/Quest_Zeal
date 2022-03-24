@@ -13,12 +13,17 @@ greenlet==1.1.2
 idna==3.3
 itsdangerous==2.1.1
 Jinja2==3.0.3
+joblib==1.1.0
 MarkupSafe==2.1.1
+nltk==3.7
+numpy==1.22.3
 pycparser==2.21
 python-decouple==3.6
 python-dotenv==0.19.2
+regex==2022.3.15
 six==1.16.0
 SQLAlchemy==1.4.32
 tornado==6.1
+tqdm==4.63.1
 Werkzeug==2.0.3
 WTForms==3.0.1
