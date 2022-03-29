@@ -13,7 +13,7 @@ from app        import app, lm, db, bc
 from app.models import Users
 from app.forms  import LoginForm, RegisterForm
 from app.QA_Gen_Model import QA_Gen_Model
-
+from app.Objective_QA_Gen_Model import MCQ_Generator
 # model = pickle.load(open('app/model.pkl','rb'))
 UPLOAD_FOLDER = 'Uploaded Material'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -164,4 +164,13 @@ def Question_Generation():
     size = len(que)
     return render_template('Question_Generation.html', content = content, question = que, answer = ans, size = size )
    
+@app.route('/Objective_QA_Generation')
+def Objective_QA_Generation():
+    try:
+        with open('Uploaded Material/dbms.txt', 'r') as f:
+            content = f.read()
+    except:
+        return render_template('page-404.html'), 404
     
+    Objective_Questions = MCQ_Generator.generate_mcq_questions(content, 10)
+    return render_template('Objective_Questions.html', Objective_Questions = Objective_Questions)
