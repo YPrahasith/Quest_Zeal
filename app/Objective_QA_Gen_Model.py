@@ -278,7 +278,7 @@ class DistractorGenerator:
         self.tokenizer_len = len(self.tokenizer)
 
         checkpoint_path = (
-            "app/ml_models/race-distractors.ckpt"
+            "../ml_models/race-distractors.ckpt"
         )
         self.dg_model = QGModel.load_from_checkpoint(checkpoint_path)
         self.dg_model.freeze()
@@ -434,7 +434,7 @@ class QuestionGenerator:
         # print('tokenizer len after: ', len(self.tokenizer))
         self.tokenizer_len = len(self.tokenizer)
 
-        checkpoint_path = "app/ml_models/multitask-qg-ag.ckpt"
+        checkpoint_path = "..\ml_models\multitask-qg-ag.ckpt"
         self.qg_model = QGModel.load_from_checkpoint(checkpoint_path)
         self.qg_model.freeze()
         self.qg_model.eval()
@@ -501,7 +501,7 @@ class QuestionGenerator:
 class Sense2VecDistractorGeneration:
     def __init__(self):
         self.s2v = Sense2Vec().from_disk(
-            "app/ml_models/s2v_old"
+            "..\ml_models\s2v_old"
         )
 
     def generate(self, answer: str, desired_count: int) -> List[str]:
