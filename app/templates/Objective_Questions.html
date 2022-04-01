@@ -20,7 +20,7 @@
 
                 {{ question.questionText}}
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name=" {{ question.questionText}}"  value="{{ question.answerText}}" checked>
+                    <input class="form-check-input" type="radio" name=" {{ question.questionText}}"  value="{{ question.answerText}}">
                     <label class="form-check-label" for="{{ question.answerText}}">
                         {{ question.answerText}}
                     </label>
@@ -32,7 +32,7 @@
               {% for distractor in question.distractors%}
              
               <div class="form-check">
-                <input class="form-check-input" type="radio" name=" {{ question.questionText}}"  value="{{ distractor }}" checked>
+                <input class="form-check-input" type="radio" name=" {{ question.questionText}}"  value="{{ distractor }}">
                 <label class="form-check-label" for="{{ distractor }}">
                     {{ distractor }}
                 </label>
