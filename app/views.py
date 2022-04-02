@@ -1,7 +1,7 @@
 # Python modules
+import random
+import os
 
-import os, logging 
-import pickle
 # Flask modules
 from flask import render_template, request, url_for, redirect, send_from_directory
 from flask_login import login_user, logout_user, current_user, login_required
@@ -176,6 +176,16 @@ def Objective_QA_Generation():
             return render_template('page-404.html'), 404
         
         Objective_Questions = MCQ_Generator.generate_mcq_questions(content, 10)
+        i = 1
+        for questions in Objective_Questions:
+            print(i)
+            print(questions.questionText)
+            questions.distractors.append(questions.answerText)
+            print(questions.answerText)
+            random.shuffle(questions.distractors)
+            print(questions.distractors)
+            i+=1
+            
         return render_template('Objective_Questions.html', Objective_Questions = Objective_Questions)
 
 # Return sitemap
