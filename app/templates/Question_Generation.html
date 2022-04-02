@@ -12,7 +12,7 @@
 <body>
     <main>
         <div class="px-4 py-5 my-5 text-center">
-            <h1 class="display-5 fw-bold">Questions Generated Successfully</h1>
+            <h1 class="display-5 fw-bold">Subjective Questions</h1>
             <div class="col-lg-6 mx-auto">
          
                 <div>
@@ -21,12 +21,13 @@
                     <div class=" py-1 fw-bold">
                     {{ question[i] }}
                     </div>
-                    {{ answer[i] }}
+                    <textarea> </textarea>
                     </div>
                     {% endfor %} 
                     
                 </div>
             </div>
+            <a href="{{url_for('response')}}" type="button" class="btn btn-primary btn-lg px-4 gap-3">Submit Answers</a>
         </div>
 </main>
 </body>

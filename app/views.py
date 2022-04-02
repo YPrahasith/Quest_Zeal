@@ -162,6 +162,8 @@ def Question_Generation():
         que, ans = QA_Gen_Model.generate_test(content)
         size = len(que)
         return render_template('Question_Generation.html', content = content, question = que, answer = ans, size = size )
+    else :
+        return render_template('unAuth.html')
 
 #Objective Question Generation
 @app.route('/Objective_QA_Generation')
@@ -176,17 +178,22 @@ def Objective_QA_Generation():
             return render_template('page-404.html'), 404
         
         Objective_Questions = MCQ_Generator.generate_mcq_questions(content, 10)
-        i = 1
         for questions in Objective_Questions:
-            print(i)
-            print(questions.questionText)
             questions.distractors.append(questions.answerText)
-            print(questions.answerText)
             random.shuffle(questions.distractors)
-            print(questions.distractors)
-            i+=1
-            
         return render_template('Objective_Questions.html', Objective_Questions = Objective_Questions)
+    else :
+        return render_template('unAuth.html')
+    
+#responses
+@app.route('/response')
+@login_required
+def response():
+    name = current_user.user
+    if name !="admin":
+        return render_template('response.html')
+    else :
+        return render_template('unAuth.html')
 
 # Return sitemap
 @app.route('/sitemap.xml')
