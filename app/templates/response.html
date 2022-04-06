@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Quest Zeal - Responses</title>
+
+</head>
+
+<body>
+    <main>
+
+        <div class="px-4 py-5 my-5 text-center" >
+
+            <p class="lead mb-4">
+               You have responded the test with the following responses
+            </p>
+           <div id="result">
+           </div>
+        </div>
+    </main>
+
+</body>
+
+</html>
+
+<script>
+    if (typeof(Storage) !== "undefined") {
+        var res = JSON.parse(localStorage.getItem("resp"));
+        console.log(res)
+        document.getElementById("result").innerHTML = localStorage.getItem("resp");
+        } else {
+        document.getElementById("result").innerHTML = "No responses yet";
+    }
+</script>

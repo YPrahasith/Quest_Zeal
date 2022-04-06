@@ -1,7 +1,7 @@
 # Python modules
+import random
+import os
 
-import os, logging 
-import pickle
 # Flask modules
 from flask import render_template, request, url_for, redirect, send_from_directory
 from flask_login import login_user, logout_user, current_user, login_required
@@ -121,7 +121,7 @@ def index():
     except TemplateNotFound:
         return render_template('page-404.html'), 404
     
-
+#Render Student Dashboard
 @app.route('/studentDashboard')
 @login_required
 def studentDashboard():
@@ -130,6 +130,7 @@ def studentDashboard():
     else :
         return render_template( 'studentDashboard.html',name = current_user.user , email= current_user.email)
 
+#Render Tutor Dashboard
 @app.route('/tutorDashboard', methods=['GET', 'POST'])
 @login_required
 def tutorDashboard():
@@ -146,31 +147,55 @@ def tutorDashboard():
     else :
         return render_template('page-404.html'), 404
 
+
+@app.route('/Subjective_Questions')
+@login_required
+def Subjective_QA_Generation():
+    name = current_user.user
+    if name!="admin" :
+        try:
+            with open('Uploaded Material/dbms.txt', 'r') as f:
+                content = f.read()
+        except:
+            return render_template('page-404.html'), 404
+        
+        que, ans = QA_Gen_Model.generate_test(content)
+        size = len(que)
+        return render_template('Subjective_Questions.html', question = que, answer = ans, size = size )
+    else :
+        return render_template('unAuth.html')
+
+#Objective Question Generation
+@app.route('/Objective_QA_Generation')
+@login_required 
+def Objective_QA_Generation():
+    name = current_user.user
+    if name!="admin" :
+        try:
+            with open('Uploaded Material/dbms.txt', 'r') as f:
+                content = f.read()
+        except:
+            return render_template('page-404.html'), 404
+        
+        Objective_Questions = MCQ_Generator.generate_mcq_questions(content, 10)
+        for questions in Objective_Questions:
+            questions.distractors.append(questions.answerText)
+            random.shuffle(questions.distractors)
+        return render_template('Objective_Questions.html', Objective_Questions = Objective_Questions)
+    else :
+        return render_template('unAuth.html')
+    
+#responses
+@app.route('/response')
+@login_required
+def response():
+    name = current_user.user
+    if name !="admin":
+        return render_template('response.html')
+    else :
+        return render_template('unAuth.html')
+
 # Return sitemap
 @app.route('/sitemap.xml')
 def sitemap():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'sitemap.xml')
-
-@app.route('/Question_Generation')
-@login_required
-def Question_Generation():
-    try:
-        with open('Uploaded Material/dbms.txt', 'r') as f:
-            content = f.read()
-    except:
-        return render_template('page-404.html'), 404
-        
-    que, ans = QA_Gen_Model.generate_test(content)
-    size = len(que)
-    return render_template('Question_Generation.html', content = content, question = que, answer = ans, size = size )
-   
-@app.route('/Objective_QA_Generation')
-def Objective_QA_Generation():
-    try:
-        with open('Uploaded Material/dbms.txt', 'r') as f:
-            content = f.read()
-    except:
-        return render_template('page-404.html'), 404
-    
-    Objective_Questions = MCQ_Generator.generate_mcq_questions(content, 10)
-    return render_template('Objective_Questions.html', Objective_Questions = Objective_Questions)

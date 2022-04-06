@@ -15,3 +15,8 @@
 main>.container {
     padding: 60px 15px 0;
 }
+
+textarea{
+    width: 400px;
+    height: 100px;
+}

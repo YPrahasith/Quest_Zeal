@@ -15,9 +15,50 @@
             <h1 class="display-5 fw-bold">Subjective Questions</h1>
             <div class="col-lg-6 mx-auto">
          
-               
+                <div>
+                    {% set ns = namespace(count=0) %}
+                    {% for i in range(size) %}
+                    <div class="py-4">
+                    <div class=" py-1 fw-bold" name=>
+                    {{ question[i] }}
+                    </div>
+                    <textarea
+                    id="{{ ns.count }}"
+                    name="{{ ns.count }}"
+                    > </textarea>
+                    </div>
+                    {% set ns.count = ns.count + 1 %}
+                    {% endfor %} 
+                    
+                </div>
             </div>
+            
+           <button  type="button" onclick=" qgen()">Submit Answers</button>
         </div>
 </main>
 </body>
 </html>
+
+<script>
+    function qgen(){
+        localStorage.clear()
+        var responses=[]
+        var filled = false
+        for (let i = 0; i <= 2; i++){
+        var answer = document.getElementById(i)
+            if(answer.value != " "){
+                filled = true
+                responses.push(answer.value)
+            }
+        }
+        if(!filled)
+        alert("Please fill all entries")
+        else{
+        if (typeof(Storage) !== "undefined") {
+            localStorage.setItem("resp", JSON.stringify(responses));
+            }
+        location.replace('/response')
+        }
+    }
+</script>
+
