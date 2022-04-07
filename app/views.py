@@ -148,9 +148,9 @@ def tutorDashboard():
         return render_template('page-404.html'), 404
 
 
-@app.route('/Question_Generation')
+@app.route('/Subjective_Questions')
 @login_required
-def Question_Generation():
+def Subjective_QA_Generation():
     name = current_user.user
     if name!="admin" :
         try:
@@ -161,7 +161,7 @@ def Question_Generation():
         
         que, ans = QA_Gen_Model.generate_test(content)
         size = len(que)
-        return render_template('Question_Generation.html', content = content, question = que, answer = ans, size = size )
+        return render_template('Subjective_Questions.html', question = que, answer = ans, size = size )
     else :
         return render_template('unAuth.html')
 
