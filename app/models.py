@@ -27,3 +27,26 @@ class Users(db.Model, UserMixin):
         db.session.commit( )
 
         return self 
+class Courses(db.Model):
+    
+    __tablename__ = 'Courses'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(20), unique=False, nullable=False)
+    last_name = db.Column(db.String(20), unique=False, nullable=False)
+    age = db.Column(db.Integer, nullable=False)
+    
+    def __init__(self,first_name, last_name, age):
+        self.first_name = first_name
+        self.last_name =last_name
+        self.age = age
+    
+    def __repr__(self):
+        return f"Name : {self.first_name}, Age: {self.age}"
+    
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+        
+        return self
+
