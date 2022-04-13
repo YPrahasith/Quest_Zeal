@@ -125,16 +125,16 @@ def index():
 @app.route('/studentDashboard')
 @login_required
 def studentDashboard():
+    courses = Courses.query.all()
     if current_user.user == "admin":
         return render_template('page-404.html'), 404
     else :
-        return render_template( 'studentDashboard.html',name = current_user.user , email= current_user.email)
+        return render_template( 'studentDashboard.html',name = current_user.user , email= current_user.email, courses=courses)
 
 #Render Tutor Dashboard
 @app.route('/tutorDashboard', methods=['GET', 'POST'])
 @login_required
 def tutorDashboard():
-    courses = Courses.query.all()
     name = current_user.user
     if name=="admin" :
         if request.method == 'POST':
@@ -144,7 +144,7 @@ def tutorDashboard():
                
             return redirect(url_for('tutorDashboard'))
 
-        return render_template( 'tutorDashboard.html',name = name , email= current_user.email,courses = courses)
+        return render_template( 'tutorDashboard.html',name = name , email= current_user.email)
     else :
         return render_template('page-404.html'), 404
 
@@ -211,11 +211,11 @@ def add():
     last_name = request.form.get("last_name")
     age = request.form.get("age")
  
-    # create an object of the Profile class of models and
+    # create an object of the course class of models and
     # store data as a row in our datatable
     if first_name != '' and last_name != '' and age is not None:
-        p = Courses(first_name=first_name, last_name=last_name, age=age)
-        db.session.add(p)
+        c = Courses(first_name=first_name, last_name=last_name, age=age)
+        db.session.add(c)
         db.session.commit()
         return redirect('/tutorDashboard')
     else:
@@ -225,7 +225,6 @@ def add():
 def erase(id):
      
     # deletes the data on the basis of unique id and
-    # directs to home page
     data = Courses.query.get(id)
     db.session.delete(data)
     db.session.commit()

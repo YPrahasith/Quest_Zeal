@@ -1,56 +1,32 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>Quest Zeal</title>
 
     <!-- CSS only -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/assets/css/custom.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="/static/assets/css/custom.css" />
+  </head>
 
-</head>
-
-<body>
+  <body>
     <main>
+      <div class="px-4 py-5 my-5 text-center">
+        <h1 class="display-5 fw-bold">Quest Zeal Tutor Dashboard</h1>
+        <div class="col-lg-6 mx-auto">
+          <p class="lead mb-4">An AI Based Question Answering System</p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            Hello Tutor {{name}} !
+            <br />
+            Here's your {{email}}
+          </div>
+          <br />
+          <br />
+          <a href="/add_data">ADD</a>
 
-        <div class="px-4 py-5 my-5 text-center">
-            <h1 class="display-5 fw-bold">Quest Zeal Tutor Dashboard</h1>
-            <div class="col-lg-6 mx-auto">
-                <p class="lead mb-4">
-                    An AI Based Question Answering System
-                </p>
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                    Hello Tutor {{name}} !
-                    <br />
-                    Here's your {{email}}
-                </div>
-                <br />
-                <br />
-                <div>
-                    <h3>Courses</h3>
-      <a href="/add_data">ADD</a>
-      <br>
-      <table>
-         <thead>
-            <th>Id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Age</th>
-            <th>#</th>
-         </thead>
-         {% for data in courses %}
-         <tbody>
-            <td>{{data.id}}</td>
-            <td>{{data.first_name}}</td>
-            <td>{{data.last_name}}</td>
-            <td>{{data.age}}</td>
-            <td><a href="/delete/{{data.id}}" type="button">Delete</a></td>
-         </tbody>
-         {% endfor%}
-      </table>
-                </div>
-
-                <!--<div>
+          <!--<div>
 
                     <form method="POST" action="" enctype="multipart/form-data">
                         <input type="file" name="file" accept=".txt">
@@ -59,26 +35,27 @@
                         <input type="submit" value="Submit" onclick="msg()">
                     </form>
                 </div> -->
-                <br />
-                <br />
-                
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <br />
+          <br />
 
-                    <a href="/logout" type="button" class="btn btn-primary btn-lg px-4 gap-3">Logout</a>
-                </div>
-            </div>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a
+              href="/logout"
+              type="button"
+              class="btn btn-primary btn-lg px-4 gap-3"
+              >Logout</a
+            >
+          </div>
         </div>
+      </div>
     </main>
-
 
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function msg() {
-            alert("File Uploaded Successfully!");
-        }  
+      function msg() {
+        alert("File Uploaded Successfully!");
+      }
     </script>
-
-</body>
-
+  </body>
 </html>
