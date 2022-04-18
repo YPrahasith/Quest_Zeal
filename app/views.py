@@ -135,6 +135,7 @@ def studentDashboard():
 @app.route('/tutorDashboard', methods=['GET', 'POST'])
 @login_required
 def tutorDashboard():
+    courses = Courses.query.all()
     name = current_user.user
     if name=="admin" :
         if request.method == 'POST':
@@ -144,7 +145,7 @@ def tutorDashboard():
                
             return redirect(url_for('tutorDashboard'))
 
-        return render_template( 'tutorDashboard.html',name = name , email= current_user.email)
+        return render_template( 'tutorDashboard.html',name = name , email= current_user.email, courses = courses)
     else :
         return render_template('page-404.html'), 404
 
@@ -197,9 +198,6 @@ def response():
         return render_template('unAuth.html')
 
 
-@app.route('/add_data')
-def add_data():
-    return render_template('add_data.html')
 
 @app.route('/add', methods=["POST"])
 def add():

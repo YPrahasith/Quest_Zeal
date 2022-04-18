@@ -38,8 +38,6 @@
                   <th>Age</th>
                   <th></th>
                   <th>Test</th>
-                  <th></th>
-                  <th>#</th>
                 </thead>
                 {% for data in courses %}
                 <tbody>
@@ -52,8 +50,6 @@
                   <td>{{data.age}}</td>
                   <td></td>
                   <td> <a href="{{url_for('Objective_QA_Generation')}}"><button>Objective</button></a> </td>
-                  <td></td>
-                  <td> <a href="/delete/{{data.id}}" type="button">Delete</a> </td>
                   
                 </tbody>
                 <tbody>
@@ -66,8 +62,6 @@
                     <td>{{data.age}}</td>
                     <td></td>
                     <td> <a href="{{url_for('Subjective_QA_Generation')}}"><button>Subjective</button></a> </td>
-                    <td></td>
-                    <td> <a href="/delete/{{data.id}}" type="button">Delete</a> </td>
                     
                   </tbody>
                 {% endfor%}
