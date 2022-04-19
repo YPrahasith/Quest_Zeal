@@ -31,23 +31,23 @@
                 <thead>
                   <th>Id</th>
                   <th></th>
-                  <th>First Name</th>
+                  <th>Course Name</th>
                   <th></th>
-                  <th>Last Name</th>
+                  <th>Test Name</th>
                   <th></th>
-                  <th>Age</th>
+                  <th>File Name</th>
                   <th></th>
                   <th>Test</th>
                 </thead>
-                {% for data in courses %}
+                {% for data in tests %}
                 <tbody>
                   <td>{{data.id}}</td>
                   <td></td>
-                  <td>{{data.first_name}}</td>
+                  <td>{{data.course_name}}</td>
                   <td></td>
-                  <td>{{data.last_name}}</td>
+                  <td>{{data.test_name}}</td>
                   <td></td>
-                  <td>{{data.age}}</td>
+                  <td>{{data.file_name}}</td>
                   <td></td>
                   <td> <a href="{{url_for('Objective_QA_Generation')}}"><button>Objective</button></a> </td>
                   
@@ -55,11 +55,11 @@
                 <tbody>
                     <td>{{data.id}}</td>
                     <td></td>
-                    <td>{{data.first_name}}</td>
+                    <td>{{data.course_name}}</td>
                     <td></td>
-                    <td>{{data.last_name}}</td>
+                    <td>{{data.test_name}}</td>
                     <td></td>
-                    <td>{{data.age}}</td>
+                    <td>{{data.file_name}}</td>
                     <td></td>
                     <td> <a href="{{url_for('Subjective_QA_Generation')}}"><button>Subjective</button></a> </td>
                     

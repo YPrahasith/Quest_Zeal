@@ -1,3 +1,4 @@
+
 # Python modules
 import random
 import os
@@ -10,7 +11,7 @@ from jinja2 import TemplateNotFound
 from werkzeug.utils import secure_filename
 # App modules
 from app        import app, lm, db, bc
-from app.models import Users, Courses
+from app.models import Users, Tests
 from app.forms  import LoginForm, RegisterForm
 from app.QA_Gen_Model import QA_Gen_Model
 from app.Objective_QA_Gen_Model import MCQ_Generator
@@ -125,27 +126,20 @@ def index():
 @app.route('/studentDashboard')
 @login_required
 def studentDashboard():
-    courses = Courses.query.all()
+    tests = Tests.query.all()
     if current_user.user == "admin":
         return render_template('page-404.html'), 404
     else :
-        return render_template( 'studentDashboard.html',name = current_user.user , email= current_user.email, courses=courses)
+        return render_template( 'studentDashboard.html',name = current_user.user , email= current_user.email, tests=tests)
 
 #Render Tutor Dashboard
 @app.route('/tutorDashboard', methods=['GET', 'POST'])
 @login_required
 def tutorDashboard():
-    courses = Courses.query.all()
+    tests = Tests.query.all()
     name = current_user.user
-    if name=="admin" :
-        if request.method == 'POST':
-            uploaded_file = request.files['file']
-            if uploaded_file.filename != '':
-                uploaded_file.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(uploaded_file.filename)))
-               
-            return redirect(url_for('tutorDashboard'))
-
-        return render_template( 'tutorDashboard.html',name = name , email= current_user.email, courses = courses)
+    if name=="admin" :               
+        return render_template( 'tutorDashboard.html',name = name , email= current_user.email, tests = tests)
     else :
         return render_template('page-404.html'), 404
 
@@ -205,15 +199,20 @@ def add():
     # form page and store it in our database. Remember
     # that inside the get the name should exactly be the same
     # as that in the html input fields
-    first_name = request.form.get("first_name")
-    last_name = request.form.get("last_name")
-    age = request.form.get("age")
- 
+    
+    course_name = request.form.get("course_name")
+    test_name = request.form.get("test_name")
+    file = request.files['file']
+    file_name = file.filename
+    print(file_name)
+    if file.filename != '':
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(file.filename)))
+
     # create an object of the course class of models and
     # store data as a row in our datatable
-    if first_name != '' and last_name != '' and age is not None:
-        c = Courses(first_name=first_name, last_name=last_name, age=age)
-        db.session.add(c)
+    if test_name != '' and course_name != '' :
+        t = Tests(course_name=course_name, test_name=test_name, file_name=file_name)
+        db.session.add(t)
         db.session.commit()
         return redirect('/tutorDashboard')
     else:
@@ -223,7 +222,7 @@ def add():
 def erase(id):
      
     # deletes the data on the basis of unique id and
-    data = Courses.query.get(id)
+    data = Tests.query.get(id)
     db.session.delete(data)
     db.session.commit()
     return redirect('/tutorDashboard')

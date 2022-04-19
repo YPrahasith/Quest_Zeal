@@ -1,3 +1,4 @@
+
 from app         import db
 from flask_login import UserMixin
 
@@ -27,22 +28,23 @@ class Users(db.Model, UserMixin):
         db.session.commit( )
 
         return self 
-class Courses(db.Model):
+
+class Tests(db.Model):
     
-    __tablename__ = 'Courses'
+    __tablename__ = 'Tests'
     
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(20), unique=False, nullable=False)
-    last_name = db.Column(db.String(20), unique=False, nullable=False)
-    age = db.Column(db.Integer, nullable=False)
+    course_name = db.Column(db.String(20), unique=False, nullable=False)
+    test_name = db.Column(db.String(20), unique=False, nullable=False)
+    file_name = db.Column(db.String(20), unique=True, nullable=False)
     
-    def __init__(self,first_name, last_name, age):
-        self.first_name = first_name
-        self.last_name =last_name
-        self.age = age
+    def __init__(self,course_name,test_name,file_name):
+        self.course_name = course_name
+        self.test_name =  test_name
+        self.file_name = file_name
     
     def __repr__(self):
-        return f"Name : {self.first_name}, Age: {self.age}"
+        return f"Name : {self.course_name}, File name: {self.file_name}"
     
     def save(self):
         db.session.add(self)
