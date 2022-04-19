@@ -57,8 +57,6 @@
                 <th></th>
                 <th>File Name </th>
                 <th></th>
-                <th>Test</th>
-                <th></th>
                 <th>#</th>
               </thead>
               {% for data in tests %}
@@ -70,29 +68,6 @@
                 <td>{{data.test_name}}</td>
                 <td></td>
                 <td>{{data.file_name}}</td>
-                <td></td>
-                <td>
-                  <a href="{{url_for('Objective_QA_Generation')}}"
-                    ><button>Objective</button></a
-                  >
-                </td>
-                <td></td>
-                <td><a href="/delete/{{data.id}}" type="button">Delete</a></td>
-              </tbody>
-              <tbody>
-                <td>{{data.id}}</td>
-                <td></td>
-                <td>{{data.course_name}}</td>
-                <td></td>
-                <td>{{data.test_name}}</td>
-                <td></td>
-                <td>{{data.file_name}}</td>
-                <td></td>
-                <td>
-                  <a href="{{url_for('Subjective_QA_Generation')}}"
-                    ><button>Subjective</button></a
-                  >
-                </td>
                 <td></td>
                 <td><a href="/delete/{{data.id}}" type="button">Delete</a></td>
               </tbody>

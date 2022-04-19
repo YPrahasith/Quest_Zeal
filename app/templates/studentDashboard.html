@@ -35,8 +35,6 @@
                   <th></th>
                   <th>Test Name</th>
                   <th></th>
-                  <th>File Name</th>
-                  <th></th>
                   <th>Test</th>
                 </thead>
                 {% for data in tests %}
@@ -47,9 +45,7 @@
                   <td></td>
                   <td>{{data.test_name}}</td>
                   <td></td>
-                  <td>{{data.file_name}}</td>
-                  <td></td>
-                  <td> <a href="{{url_for('Objective_QA_Generation')}}"><button>Objective</button></a> </td>
+                  <td> <a href="/Objective_QA_Generation/{{data.id}}"><button>Objective</button></a> </td>
                   
                 </tbody>
                 <tbody>
@@ -59,9 +55,7 @@
                     <td></td>
                     <td>{{data.test_name}}</td>
                     <td></td>
-                    <td>{{data.file_name}}</td>
-                    <td></td>
-                    <td> <a href="{{url_for('Subjective_QA_Generation')}}"><button>Subjective</button></a> </td>
+                    <td> <a href="/Subjective_Questions/{{data.id}}"><button>Subjective</button></a> </td>
                     
                   </tbody>
                 {% endfor%}

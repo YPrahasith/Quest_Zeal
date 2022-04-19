@@ -144,17 +144,16 @@ def tutorDashboard():
         return render_template('page-404.html'), 404
 
 
-@app.route('/Subjective_Questions')
+@app.route('/Subjective_Questions/<int:id>')
 @login_required
-def Subjective_QA_Generation():
+def Subjective_QA_Generation(id):
     name = current_user.user
+    data = Tests.query.get(id)
     if name!="admin" :
-        try:
-            with open('Uploaded Material/dbms.txt', 'r') as f:
-                content = f.read()
-        except:
-            return render_template('page-404.html'), 404
-        
+        path = 'Uploaded Material/'+data.file_name
+        print(path)
+        with open(path, 'r') as f:
+            content = f.read()
         que, ans = QA_Gen_Model.generate_test(content)
         size = len(que)
         return render_template('Subjective_Questions.html', question = que, answer = ans, size = size )
@@ -162,17 +161,16 @@ def Subjective_QA_Generation():
         return render_template('unAuth.html')
 
 #Objective Question Generation
-@app.route('/Objective_QA_Generation')
+@app.route('/Objective_QA_Generation/<int:id>')
 @login_required 
-def Objective_QA_Generation():
+def Objective_QA_Generation(id):
     name = current_user.user
+    data = Tests.query.get(id)
     if name!="admin" :
-        try:
-            with open('Uploaded Material/dbms.txt', 'r') as f:
-                content = f.read()
-        except:
-            return render_template('page-404.html'), 404
-        
+        path = 'Uploaded Material/'+data.file_name
+        print(path)
+        with open(path, 'r') as f:
+            content = f.read()
         Objective_Questions = MCQ_Generator.generate_mcq_questions(content, 10)
         for questions in Objective_Questions:
             questions.distractors.append(questions.answerText)
