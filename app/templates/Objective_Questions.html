@@ -34,16 +34,17 @@
 
           {% endfor%} {% set ns.count = ns.count + 1 %} {% endfor %}
         </div>
-        <button type="button" onclick=" validateForm()">Submit</button>
+        <button type="button" onclick=" validateForm({{answers}})">Submit</button>
       </div>
     </main>
   </body>
 </html>
 
 <script type="text/javascript">
-  function validateForm() {
+  function validateForm(answers) {
+    var length = answers.length
     const responses =[]
-    for (let i = 0; i <= 10; i++){
+    for (let i = 0; i < length; i++){
       var radio = document.getElementsByName(i);
       var checkValue = false;
     for(let j=0; j< radio.length ;j++){
@@ -57,7 +58,15 @@
   if (!checkValue) 
     alert("Please make sure to select an option for all the questions");
     else{
+      var score = 0;
+      for(let i=0;i<length;i++){
+        if(answers[i] == responses[i])
+        score +=1;
+      }
+
+      score = (score/length)*100;
       if (typeof(Storage) !== "undefined") {
+          localStorage.setItem("score", score)
           localStorage.setItem("resp", JSON.stringify(responses));
           }
       location.replace('/response')

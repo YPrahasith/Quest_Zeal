@@ -172,10 +172,12 @@ def Objective_QA_Generation(id):
         with open(path, 'r') as f:
             content = f.read()
         Objective_Questions = MCQ_Generator.generate_mcq_questions(content, 10)
+        answers = []
         for questions in Objective_Questions:
             questions.distractors.append(questions.answerText)
             random.shuffle(questions.distractors)
-        return render_template('Objective_Questions.html', Objective_Questions = Objective_Questions)
+            answers.append(questions.answerText)
+        return render_template('Objective_Questions.html', Objective_Questions = Objective_Questions, answers = answers)
     else :
         return render_template('unAuth.html')
     

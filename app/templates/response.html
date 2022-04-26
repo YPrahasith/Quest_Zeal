@@ -26,7 +26,8 @@
 <script>
     if (typeof(Storage) !== "undefined") {
         var res = JSON.parse(localStorage.getItem("resp"));
-        console.log(res)
+        var score = localStorage.getItem("score")
+        
         document.getElementById("result").innerHTML = localStorage.getItem("resp");
         } else {
         document.getElementById("result").innerHTML = "No responses yet";
