@@ -29,11 +29,11 @@
               <br />
               <table>
                 <thead>
-                  <th>Course Id</th>
+                  <th>CourseId</th>
                   <th></th>
-                  <th>Course Name</th>
+                  <th>CourseName</th>
                   <th></th>
-                  <th>Test Name</th>
+                  <th>TestName</th>
                   <th></th>
                   <th>Test</th>
                 </thead>
@@ -63,6 +63,13 @@
             </div>
             <br />
             <br />
+            <br />
+            <div>
+            </div>
+            <div>
+            </div>
+              <div>
+              </div>
             <div>
               <h3>Performance</h3>
               <br />
@@ -70,15 +77,17 @@
                 <thead>
                   <th>Id</th>
                   <th></th>
-                  <th>Course Id</th>
+                  <th>CourseId</th>
                   <th></th>
-                  <th>Course Name</th>
+                  <th>CourseName</th>
                   <th></th>
-                  <th>Test Name</th>
+                  <th>TestName</th>
                   <th></th>
                   <th>Type</th>
                   <th></th>
                   <th>Score</th>
+                  <th></th>
+                  <th>#</th>
                 </thead>
                 {% for data in students %}
                 <tbody>
@@ -93,7 +102,7 @@
                   <td>{{data.type}}</td>
                   <td></td>
                   <td>{{data.score}}</td>
-                  
+                  <td><td><a href="/dlt/{{data.id}}" type="button">Delete</a></td>
                 </tbody>
                 {% endfor%}
               </table>

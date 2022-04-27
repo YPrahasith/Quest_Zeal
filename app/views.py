@@ -146,7 +146,7 @@ def tutorDashboard():
         return render_template('page-404.html'), 404
 
 
-@app.route('/Subjective_Questions/<int:id>', )
+@app.route('/Subjective_Questions/<int:id>' )
 @login_required
 def Subjective_QA_Generation(id):
     name = current_user.user
@@ -157,7 +157,7 @@ def Subjective_QA_Generation(id):
             content = f.read()
         que, ans = QA_Gen_Model.generate_test(content)
         size = len(que)
-        return render_template('Subjective_Questions.html', question = que, answer = ans, size = size )
+        return render_template('Subjective_Questions.html', question = que, answer = ans, size = size , id=id)
     else :
         return render_template('unAuth.html')
 
@@ -199,6 +199,20 @@ def response(id,score):
     else :
         return render_template('unAuth.html')
 
+#responses
+@app.route('/responses/<int:id>/<int:score>')
+@login_required
+def responses(id,score):
+    name = current_user.user
+    data = Tests.query.get(id)
+    s = Students(course_id=id, course_name=data.course_name, test_name=data.test_name, type = "Subjective", score=score)
+    db.session.add(s)
+    db.session.commit()
+    if name !="admin":
+        return render_template('response.html', score=score, name = name, data=data)
+    else :
+        return render_template('unAuth.html')
+
 
 @app.route('/add', methods=["POST"])
 def add():
@@ -228,11 +242,19 @@ def add():
 @app.route('/delete/<int:id>')
 def erase(id):
      
-    # deletes the data on the basis of unique id and
+    # deletes the data on the basis of unique id 
     data = Tests.query.get(id)
     db.session.delete(data)
     db.session.commit()
     return redirect('/tutorDashboard')
+
+@app.route('/dlt/<int:id>')
+def dlt(id):
+    # deletes the data on the basis of unique id 
+    data = Students.query.get(id)
+    db.session.delete(data)
+    db.session.commit()
+    return redirect('/studentDashboard')
 
 # Return sitemap
 @app.route('/sitemap.xml')
