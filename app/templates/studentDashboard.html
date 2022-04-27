@@ -29,7 +29,7 @@
               <br />
               <table>
                 <thead>
-                  <th>Id</th>
+                  <th>Course Id</th>
                   <th></th>
                   <th>Course Name</th>
                   <th></th>
@@ -61,7 +61,43 @@
                 {% endfor%}
               </table>
             </div>
-            
+            <br />
+            <br />
+            <div>
+              <h3>Performance</h3>
+              <br />
+              <table>
+                <thead>
+                  <th>Id</th>
+                  <th></th>
+                  <th>Course Id</th>
+                  <th></th>
+                  <th>Course Name</th>
+                  <th></th>
+                  <th>Test Name</th>
+                  <th></th>
+                  <th>Type</th>
+                  <th></th>
+                  <th>Score</th>
+                </thead>
+                {% for data in students %}
+                <tbody>
+                  <td>{{data.id}}</td>
+                  <td></td>
+                  <td>{{data.course_id}}</td>
+                  <td></td>
+                  <td>{{data.course_name}}</td>
+                  <td></td>
+                  <td>{{data.test_name}}</td>
+                  <td></td>
+                  <td>{{data.type}}</td>
+                  <td></td>
+                  <td>{{data.score}}</td>
+                  
+                </tbody>
+                {% endfor%}
+              </table>
+            </div>
           </div>
           <br />
           <br />

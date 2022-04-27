@@ -2,6 +2,7 @@
 # Python modules
 import random
 import os
+import re
 
 # Flask modules
 from flask import render_template, request, url_for, redirect, send_from_directory
@@ -11,7 +12,7 @@ from jinja2 import TemplateNotFound
 from werkzeug.utils import secure_filename
 # App modules
 from app        import app, lm, db, bc
-from app.models import Users, Tests
+from app.models import Users, Tests, Students
 from app.forms  import LoginForm, RegisterForm
 from app.QA_Gen_Model import QA_Gen_Model
 from app.Objective_QA_Gen_Model import MCQ_Generator
@@ -127,10 +128,11 @@ def index():
 @login_required
 def studentDashboard():
     tests = Tests.query.all()
+    students = Students.query.all()
     if current_user.user == "admin":
         return render_template('page-404.html'), 404
     else :
-        return render_template( 'studentDashboard.html',name = current_user.user , email= current_user.email, tests=tests)
+        return render_template( 'studentDashboard.html',name = current_user.user , email= current_user.email, tests=tests, students = students)
 
 #Render Tutor Dashboard
 @app.route('/tutorDashboard', methods=['GET', 'POST'])
@@ -144,14 +146,13 @@ def tutorDashboard():
         return render_template('page-404.html'), 404
 
 
-@app.route('/Subjective_Questions/<int:id>')
+@app.route('/Subjective_Questions/<int:id>', )
 @login_required
 def Subjective_QA_Generation(id):
     name = current_user.user
     data = Tests.query.get(id)
     if name!="admin" :
         path = 'Uploaded Material/'+data.file_name
-        print(path)
         with open(path, 'r') as f:
             content = f.read()
         que, ans = QA_Gen_Model.generate_test(content)
@@ -166,31 +167,37 @@ def Subjective_QA_Generation(id):
 def Objective_QA_Generation(id):
     name = current_user.user
     data = Tests.query.get(id)
+    if request.method == "POST":
+        print(request.form.get("1"))
     if name!="admin" :
         path = 'Uploaded Material/'+data.file_name
-        print(path)
         with open(path, 'r') as f:
             content = f.read()
-        Objective_Questions = MCQ_Generator.generate_mcq_questions(content, 10)
+        Objective_Questions = MCQ_Generator.generate_mcq_questions(content, 2)
         answers = []
         for questions in Objective_Questions:
             questions.distractors.append(questions.answerText)
             random.shuffle(questions.distractors)
             answers.append(questions.answerText)
-        return render_template('Objective_Questions.html', Objective_Questions = Objective_Questions, answers = answers)
-    else :
-        return render_template('unAuth.html')
-    
-#responses
-@app.route('/response')
-@login_required
-def response():
-    name = current_user.user
-    if name !="admin":
-        return render_template('response.html')
+        return render_template('Objective_Questions.html', Objective_Questions = Objective_Questions, answers = answers,id=id)
     else :
         return render_template('unAuth.html')
 
+
+
+#responses
+@app.route('/response/<int:id>/<int:score>')
+@login_required
+def response(id,score):
+    name = current_user.user
+    data = Tests.query.get(id)
+    s = Students(course_id=id, course_name=data.course_name, test_name=data.test_name, type = "Objective", score=score)
+    db.session.add(s)
+    db.session.commit()
+    if name !="admin":
+        return render_template('response.html', score=score, name = name, data=data)
+    else :
+        return render_template('unAuth.html')
 
 
 @app.route('/add', methods=["POST"])

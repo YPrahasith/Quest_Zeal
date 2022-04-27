@@ -13,7 +13,7 @@
   <body>
     <main>
       <div class="px-4 py-5 my-5">
-        <h1 class="display-5 fw-bold">Objective Questions</h1>
+      <h1 class="display-5 fw-bold">Objective Questions</h1>
         <div class="col-lg-6 mx-auto py-2">
           {% set ns = namespace(count=0) %} 
           {% for question in Objective_Questions %} 
@@ -65,11 +65,7 @@
       }
 
       score = (score/length)*100;
-      if (typeof(Storage) !== "undefined") {
-          localStorage.setItem("score", score)
-          localStorage.setItem("resp", JSON.stringify(responses));
-          }
-      location.replace('/response')
+      location.replace('/response/{{id}}/'+parseInt(score))
       }
   }
 </script>
