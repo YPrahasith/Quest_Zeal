@@ -128,11 +128,27 @@ def index():
 @login_required
 def studentDashboard():
     tests = Tests.query.all()
+    temp_tests = []
+    for data in range(0,len(tests)):
+        temp_tests.append([tests[data].id, tests[data].course_name, tests[data].test_name,"Objective", False])
+        temp_tests.append([tests[data].id, tests[data].course_name, tests[data].test_name, "Subjective", False])
+    n = len(temp_tests)
     students = Students.query.all()
+    for data in range(0,n):
+        print(temp_tests[data])
+        for ele in range(0,len(students)):
+            print(students[ele])
+            if students[ele].course_id == temp_tests[data][0] and students[ele].test_name == temp_tests[data][2] and students[ele].type == temp_tests[data][3]:
+                print("Executed")
+                temp_tests[data][4]=True
+                print(temp_tests[data])
+                
+    print(temp_tests)
+            
     if current_user.user == "admin":
         return render_template('page-404.html'), 404
     else :
-        return render_template( 'studentDashboard.html',name = current_user.user , email= current_user.email, tests=tests, students = students)
+        return render_template( 'studentDashboard.html',name = current_user.user , email= current_user.email, temp_tests=temp_tests, students = students)
 
 #Render Tutor Dashboard
 @app.route('/tutorDashboard', methods=['GET', 'POST'])

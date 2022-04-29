@@ -37,7 +37,7 @@ class Tests(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     course_name = db.Column(db.String(20), unique=False, nullable=False)
     test_name = db.Column(db.String(20), unique=False, nullable=False)
-    file_name = db.Column(db.String(20), unique=True, nullable=False)
+    file_name = db.Column(db.String(20), unique=False, nullable=False)
     
     def __init__(self,course_name,test_name,file_name):
         self.course_name = course_name
@@ -45,7 +45,7 @@ class Tests(db.Model):
         self.file_name = file_name
     
     def __repr__(self):
-        return f"Name : {self.course_name}, File name: {self.file_name}"
+        return f"Id : {self.id}, Test Name : {self.test_name}"
     
     def save(self):
         db.session.add(self)
@@ -72,7 +72,7 @@ class Students(db.Model):
         self.score = score
     
     def __repr__(self):
-        return f"id : {self.id}, Score: {self.score}"
+        return f"course_id : {self.course_id}, Course Name: {self.course_name}, Test Name: {self.test_name}, type:{self.type}"
     
     def save(self):
         db.session.add(self)
