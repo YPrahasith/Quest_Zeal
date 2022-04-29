@@ -1,25 +1,26 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>Quest Zeal - Responses</title>
+  </head>
 
-</head>
-
-<body>
+  <body>
     <main>
-
-        <div class="px-4 py-5 my-5 text-center" >
-
-            <p class="lead mb-4">
-               Hello {{name}} your score in {{ data.course_name }} is {{ score }}
-            </p>
-           </div>
-        </div>
-        <div>
-            <a href="/studentDashboard"><button>Go Back Home</button></a>
+      <div class="px-4 py-5 my-5 text-center">
+        <p class="lead mb-4">
+          Hello {{name}} your score in {{ data.course_name }} is {{ score }}
+        </p>
+        <br />
+        <meter id="score_meter" min=0 low=30 high=60 max=100 optimum=80 ></meter>
+      </div>
+      <br />
+      <div>
+        <a href="/studentDashboard"><button>Go Back Home</button></a>
+      </div>
     </main>
-
-</body>
-
+  </body>
 </html>
+<script>
+    
+    document.getElementById('score_meter').setAttribute('value', '{{score}}');
+</script>

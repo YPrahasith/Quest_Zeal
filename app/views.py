@@ -132,19 +132,12 @@ def studentDashboard():
     for data in range(0,len(tests)):
         temp_tests.append([tests[data].id, tests[data].course_name, tests[data].test_name,"Objective", False])
         temp_tests.append([tests[data].id, tests[data].course_name, tests[data].test_name, "Subjective", False])
-    n = len(temp_tests)
     students = Students.query.all()
-    for data in range(0,n):
-        print(temp_tests[data])
+    for data in range(0,len(temp_tests)):
         for ele in range(0,len(students)):
-            print(students[ele])
             if students[ele].course_id == temp_tests[data][0] and students[ele].test_name == temp_tests[data][2] and students[ele].type == temp_tests[data][3]:
-                print("Executed")
                 temp_tests[data][4]=True
-                print(temp_tests[data])
                 
-    print(temp_tests)
-            
     if current_user.user == "admin":
         return render_template('page-404.html'), 404
     else :
