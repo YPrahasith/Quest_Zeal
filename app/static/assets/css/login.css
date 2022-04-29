@@ -1,0 +1,56 @@
+.homepageButton  {
+    background-color: #ff6868;
+    color: white;   
+}
+@font-face {
+    font-family: Radio_Canada;
+    src: url(../fonts/RadioCanada-Medium.ttf);
+}
+
+@font-face {
+    font-family: Radio_Canada_Light;
+    src: url(../fonts//RadioCanada-Light.ttf);
+}
+
+@font-face {
+    font-family: Radio_Canada_Condensed_Regular;
+    src: url(../fonts/RadioCanada_Condensed-Regular.ttf);
+}
+
+@font-face {
+    font-family: Radio_Canada_Condensed_Medium;
+    src: url(../fonts/RadioCanada_Condensed-Medium.ttf);
+}
+
+@font-face {
+    font-family: RadioCanada_SemiCondensed-SemiBold;
+    src: url(../fonts/RadioCanada_SemiCondensed-SemiBold.ttf);
+}
+
+.text {
+    font-family: Radio_Canada;
+}
+
+.logintext{
+    font-size: 30px;
+    color: #524A4A;
+}
+.form{
+     background: #ffffff;
+}
+
+.signin{
+    background: #ff6868;
+    color: white;
+}
+
+.donthaveaccount{
+    color:white ;
+}
+
+.formtext{
+    padding: 2px;
+    margin: 2px;
+    font-family: RadioCanada_SemiCondensed-SemiBold;
+    color: #524A4A;
+}

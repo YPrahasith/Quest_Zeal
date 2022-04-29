@@ -6,60 +6,75 @@
 
     <!-- CSS only -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/assets/css/custom.css">
+    <link rel="stylesheet" href="/static/assets/css/login.css">
 
 </head>
 
 <body>
 
     <main>
+        <nav class="navbar navbar-light ">
 
-        <div class="container col-xl-10 col-xxl-8 px-4 py-5">
-            <div class="row align-items-center g-lg-5 py-5">
-                <div class="col-lg-7 text-center text-lg-start">
-                    <h1 class="display-4 fw-bold lh-1 mb-3">
-                        Quest Zeal Login
-                    </h1>
-                    <p class="col-lg-10 fs-4">
-                        An AI Based Question Answering System
-                    </p>
+            <div class="text col-12 col-md-9 px-4">
+                <a class="navbar-brand" href="/">
+                    <img src="/static/assets/images/logo.png" width="30" height="30" class="d-inline-block align-top">
+
+                    Quest Zeal
+
+                </a>
+            </div>
+            <div class="col-6 col-md-3 d-flex flex-row">
+                <div class="px-2">
+                    <a href="/" type="button" class="btn homepageButton">Contact</a>
                 </div>
+                <div class="px-2">
+                    <a href="/login" type="button" class="btn homepageButton">Log in</a>
+                </div>
+                <div class="px-2">
+                    <a href="/register" type="button" class="btn homepageButton">Register</a>
+                </div>
+            </div>
+        </nav>
+        <div class="container col-xl-10 col-xxl-8 px-4 py-3">
+            <div class="row align-items-center g-lg-5 py-5">
                 <div class="col-md-10 mx-auto col-lg-5">
 
-                    <form method="post" action="" class="p-4 p-md-5 border rounded-3 bg-light">
-
+                    <form method="post" action="" class="p-1 p-md-4 border form rounded-3">
+                         
                         {{ form.hidden_tag() }}
-
                         <p class="fw-bold">
                             {% if msg %}
                             {{ msg | safe }}
                             {% else %}
-                            Add your credentials
+                            <div class="text logintext text-center">
+                                Log in
+                            </div>
                             {% endif %}
+                            
                         </p>
 
                         <br />
-
-                        <div class="form-floating mb-3">
+                            
+                        <label class="formtext">Username</label>
+                        <div class="form-floating mb-3" >
                             {{ form.username(class="form-control") }}
-                            <label for="floatingInput">Username</label>
                         </div>
+                        <label class="formtext">Password</label>
                         <div class="form-floating mb-3">
                             {{ form.password(class="form-control", type="password") }}
-                            <label for="floatingPassword">Password</label>
+                            
                         </div>
                         <br />
-                        <!--
-                        <div class="checkbox mb-3">
-                            <label>
-                                <input type="checkbox" value="remember-me"> Remember me
-                            </label>
-                        </div> -->
-                        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+                     
+                        <button class="w-100 btn btn-lg signin" type="submit">Log in</button>
                         <hr class="my-4">
-                        <small class="text-muted">
-                            Dont have an account? <a href="{{ url_for('register') }}" class="text-right">Register</a>
-                        </small>
+                        
+                            <div class=" text donthaveaccount">
+                                <p>
+                                    Dont have an account? <a href="{{ url_for('register') }}" class="text-right text donthaveaccount" >Register</a>
+                                </p>
+                       
+                            </div>
                     </form>
                 </div>
             </div>

@@ -2,36 +2,57 @@
 <html lang="en">
 
 <head>
-    <title>Quest Zeal</title>
+  <title>Quest Zeal</title>
 
-    <!-- CSS only -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/assets/css/custom.css">
+  <!-- CSS only -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/assets/css/homepage.css">
 
 </head>
 
 <body>
-    <main>
+  <main>
+    <nav class="navbar navbar-light ">
 
-        <div class="px-4 py-5 my-5 text-center">
-            <h1 class="display-5 fw-bold">Quest Zeal Home Page</h1>
-            <div class="col-lg-6 mx-auto">
-                <p class="lead mb-4">
-                    An AI Based Question Answering System
-                </p>
+      <div class="text col-12 col-md-9 px-4">
+        <a class="navbar-brand" href="/">
+          <img src="/static/assets/images/logo.png" width="30" height="30" class="d-inline-block align-top">
 
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          Quest Zeal
 
-                    <a href="/login" type="button" class="btn btn-primary btn-lg px-4 gap-3">Login</a>
-                    <a href="/register" type="button" class="btn btn-outline-secondary btn-lg px-4">Register</a>
-                </div>
-            </div>
+        </a>
+      </div>
+      <div class="col-6 col-md-3 d-flex flex-row">
+        <div class="px-2">
+          <a href="/" type="button" class="btn homepageButton">Contact</a>
         </div>
-    </main>
+        <div class="px-2">
+          <a href="/login" type="button" class="btn homepageButton">Log in</a>
+        </div>
+        <div class="px-2">
+          <a href="/register" type="button" class="btn homepageButton">Register</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container ">
+      <div class="row ">
+        <div class=" sidetextHead col py-3">
+          The new age assessment
+        </div>
+      </div>
+      <div class="row">
+        <div class=" sidetextBody col-6 col-md-4">
+          An AI Based Question Answering System,
+          to ensure fairand unbiased means of assessing student knowledge.
+        </div>
+      </div>
+    </div>
+  </main>
 
 
-    <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
