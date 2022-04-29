@@ -1,4 +1,5 @@
 
+from enum import unique
 from app         import db
 from flask_login import UserMixin
 
@@ -36,7 +37,7 @@ class Tests(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     course_name = db.Column(db.String(20), unique=False, nullable=False)
     test_name = db.Column(db.String(20), unique=False, nullable=False)
-    file_name = db.Column(db.String(20), unique=True, nullable=False)
+    file_name = db.Column(db.String(20), unique=False, nullable=False)
     
     def __init__(self,course_name,test_name,file_name):
         self.course_name = course_name
@@ -44,7 +45,7 @@ class Tests(db.Model):
         self.file_name = file_name
     
     def __repr__(self):
-        return f"Name : {self.course_name}, File name: {self.file_name}"
+        return f"Id : {self.id}, Test Name : {self.test_name}"
     
     def save(self):
         db.session.add(self)
@@ -52,3 +53,29 @@ class Tests(db.Model):
         
         return self
 
+class Students(db.Model):
+    
+    __tablename__ = 'Students'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    course_id = db.Column(db.Integer, unique=False, nullable = False)
+    course_name = db.Column(db.String(20), unique=False, nullable=False)
+    test_name = db.Column(db.String(20), unique=False, nullable=False)
+    type = db.Column(db.String(20),unique=False,nullable=False)
+    score = db.Column(db.String(10),unique=False, nullable=False)
+    
+    def __init__(self,course_id,course_name,test_name,type,score):
+        self.course_id = course_id
+        self.course_name = course_name
+        self.test_name =  test_name
+        self.type = type
+        self.score = score
+    
+    def __repr__(self):
+        return f"course_id : {self.course_id}, Course Name: {self.course_name}, Test Name: {self.test_name}, type:{self.type}"
+    
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+        
+        return self

@@ -29,39 +29,92 @@
               <br />
               <table>
                 <thead>
-                  <th>Id</th>
+                  <th>CourseId</th>
                   <th></th>
-                  <th>Course Name</th>
+                  <th>CourseName</th>
                   <th></th>
-                  <th>Test Name</th>
+                  <th>TestName</th>
                   <th></th>
                   <th>Test</th>
                 </thead>
-                {% for data in tests %}
+                {% for data in temp_tests %}
+                <tbody>
+                  <td>{{data[0]}}</td>
+                  <td></td>
+                  <td>{{data[1]}}</td>
+                  <td></td>
+                  <td>{{data[2]}}</td>
+                  <td></td>
+                  {%if data[3] =="Objective" %}
+                  {%if data[4] == True %}
+                  <td> Attended </td>
+                  {%else%}
+                  <td>
+                    <a href="/Objective_QA_Generation/{{data[0]}}"
+                      ><button>Objective</button></a>
+                  </td>
+                  {%endif%}
+                  {%else %}
+                  {%if data[4] == True%}
+                  <td> Attended </td>
+                  {%else%}
+                  <td>
+                    <a href="/Subjective_Questions/{{data[0]}}"
+                      ><button>Subjective</button></a>
+                  </td>
+                  {%endif%}
+                  {%endif%}
+                </tbody>
+                {% endfor%}
+              </table>
+            </div>
+            <br />
+            <br />
+            <br />
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div>
+              <h3>Performance</h3>
+              <br />
+              <table>
+                <thead>
+                  <th>Id</th>
+                  <th></th>
+                  <th>CourseId</th>
+                  <th></th>
+                  <th>CourseName</th>
+                  <th></th>
+                  <th>TestName</th>
+                  <th></th>
+                  <th>Type</th>
+                  <th></th>
+                  <th>Score</th>
+                  <th></th>
+                  <th>#</th>
+                </thead>
+                {% for data in students %}
                 <tbody>
                   <td>{{data.id}}</td>
+                  <td></td>
+                  <td>{{data.course_id}}</td>
                   <td></td>
                   <td>{{data.course_name}}</td>
                   <td></td>
                   <td>{{data.test_name}}</td>
                   <td></td>
-                  <td> <a href="/Objective_QA_Generation/{{data.id}}"><button>Objective</button></a> </td>
-                  
+                  <td>{{data.type}}</td>
+                  <td></td>
+                  <td>{{data.score}}</td>
+                  <td></td>
+                  <td><a href="/dlt/{{data.id}}" type="button">Delete</a></td>
                 </tbody>
-                <tbody>
-                    <td>{{data.id}}</td>
-                    <td></td>
-                    <td>{{data.course_name}}</td>
-                    <td></td>
-                    <td>{{data.test_name}}</td>
-                    <td></td>
-                    <td> <a href="/Subjective_Questions/{{data.id}}"><button>Subjective</button></a> </td>
-                    
-                  </tbody>
                 {% endfor%}
               </table>
             </div>
-            
           </div>
           <br />
           <br />

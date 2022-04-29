@@ -1,35 +1,26 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>Quest Zeal - Responses</title>
+  </head>
 
-</head>
-
-<body>
+  <body>
     <main>
-
-        <div class="px-4 py-5 my-5 text-center" >
-
-            <p class="lead mb-4">
-               You have responded the test with the following responses
-            </p>
-           <div id="result">
-           </div>
-        </div>
+      <div class="px-4 py-5 my-5 text-center">
+        <p class="lead mb-4">
+          Hello {{name}} your score in {{ data.course_name }} is {{ score }}
+        </p>
+        <br />
+        <meter id="score_meter" min=0 low=30 high=60 max=100 optimum=80 ></meter>
+      </div>
+      <br />
+      <div>
+        <a href="/studentDashboard"><button>Go Back Home</button></a>
+      </div>
     </main>
-
-</body>
-
+  </body>
 </html>
-
 <script>
-    if (typeof(Storage) !== "undefined") {
-        var res = JSON.parse(localStorage.getItem("resp"));
-        var score = localStorage.getItem("score")
-        
-        document.getElementById("result").innerHTML = localStorage.getItem("resp");
-        } else {
-        document.getElementById("result").innerHTML = "No responses yet";
-    }
+    
+    document.getElementById('score_meter').setAttribute('value', '{{score}}');
 </script>
