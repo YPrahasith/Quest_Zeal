@@ -1,0 +1,62 @@
+/* .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+} */
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+main>.container {
+    padding: 60px 15px 0;
+}
+
+textarea{
+    width: 400px;
+    height: 100px;
+}
+
+.homepageButton  {
+    background-color: #ff6868;
+    color: white;   
+}
+
+.vectorGuy{
+    border-radius: 50%;
+}
+
+@font-face {
+    font-family: Radio_Canada;
+    src: url(../fonts/RadioCanada-Medium.ttf);
+}
+
+@font-face {
+    font-family: Radio_Canada_Light;
+    src: url(../fonts//RadioCanada-Light.ttf);
+}
+
+.text {
+    font-family: Radio_Canada;
+}
+
+body {
+    background-image: url("../images/UI.png");
+    background-size: cover;
+   }
+
+.sidetextHead{
+    font-size: 40px;
+    font-family: Radio_Canada;
+    color: #524A4A;
+}
+
+.sidetextBody{
+    font-size: 20px;
+    font-family: Radio_Canada_Light;
+    color: #524A4A;
+}
