@@ -13,20 +13,39 @@
 
   <body>
     <main>
-      <div class="px-4 py-5 my-5 text-center">
-        <h1 class="display-5 fw-bold">Quest Zeal Student Dashboard</h1>
-        <div class="col-lg-6 mx-auto">
-          <p class="lead mb-4">An AI Based Question Answering System</p>
-          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            Hello {{name}} !
-            <br />
-            Here's your {{email}}
+      <nav class="navbar navbar-light ">
+
+        <div class="text col-12 col-md-9 px-4">
+          <a class="navbar-brand" href="/">
+            <img src="/static/assets/images/logo.png" width="30" height="30" class="d-inline-block align-top">
+  
+            Quest Zeal
+  
+          </a>
+        </div>
+        <div class="col-6 col-md-3 d-flex flex-row">
+          <div class ="Logout">
+            <a href="/logout" type="button" class="btn homepageButton">Logout</a>
           </div>
-          <br />
-          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        </div>
+      </nav>
+      <div class="empty">
+      </div>
+      <div class="header">
+        <img src="/static/assets/images/pp.png" align="left" width="120" height="120" class="d-inline-block align-top">
+        <p class="prfname"> {{name}} </p>
+        <p>{{email}}
+        </p>
+        
+      </div>
+      <div class="split right">
+          <div>
             <div>
-              <h3>Courses</h3>
-              <br />
+              <div class="header2">
+                <p> Courses </p>
+              </div>
+              <div class="empty">
+              </div>
               <table>
                 <thead>
                   <th>CourseId</th>
@@ -61,10 +80,12 @@
               </table>
             </div>
           </div>
-          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <div class="d-grid gap-2 d-sm-flex justify-content">
             <div>
               <br />
-              <h3>Performance</h3>
+              <div class="header2">
+                <p> Performance </p>
+              </div>
               <br />
               <table>
                 <thead>
@@ -92,14 +113,6 @@
           </div>
           <br />
           <br />
-          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <a
-              href="/logout"
-              type="button"
-              class="btn btn-primary btn-lg px-4 gap-3"
-              >Logout</a
-            >
-          </div>
         </div>
       </div>
     </main>
