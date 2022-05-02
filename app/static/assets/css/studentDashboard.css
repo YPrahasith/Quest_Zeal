@@ -52,6 +52,18 @@ main>.container {
     padding: 60px 15px 0;
 }
 
+.btn {
+    background-color: #F99030;
+    color: white;
+    border-color: #F99030;
+}
+
+.btn1 {
+    background-color: #30F950;
+    border-color: #30F950;
+    color: white;
+}
+
 .homepageButton {
     background-color: #ff6868;
     color: white;

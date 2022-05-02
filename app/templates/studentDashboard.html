@@ -25,7 +25,7 @@
         </div>
         <div class="col-6 col-md-3 d-flex flex-row">
           <div class ="Logout">
-            <a href="/logout" type="button" class="btn homepageButton">Logout</a>
+            <a href="/login" type="button" class="btn homepageButton"> Logout </a>
           </div>
         </div>
       </nav>
@@ -59,19 +59,19 @@
                   <td>{{data[1]}}</td>
                   <td>{{data[2]}}</td>
                   {%if data[3] =="Objective" %} {%if data[4] == True %}
-                  <td>Attended</td>
+                  <td> <a><button class="btn">Attended</button></a></td>
                   {%else%}
                   <td>
                     <a href="/Objective_QA_Generation/{{data[0]}}"
-                      ><button>Objective</button></a
+                      ><button class = "btn1">Objective</button></a
                     >
                   </td>
                   {%endif%} {%else %} {%if data[4] == True%}
-                  <td>Attended</td>
+                  <td><a><button class="btn">Attended</button></a></td>
                   {%else%}
                   <td>
                     <a href="/Subjective_Questions/{{data[0]}}"
-                      ><button>Subjective</button></a
+                      ><button class="btn1">Subjective</button></a
                     >
                   </td>
                   {%endif%} {%endif%}
@@ -83,6 +83,7 @@
           <div class="d-grid gap-2 d-sm-flex justify-content">
             <div>
               <br />
+              {%if students%}
               <div class="header2">
                 <p> Performance </p>
               </div>
@@ -107,12 +108,11 @@
                   <td>{{data.score}}</td>
                   <td><a href="/dlt/{{data.id}}" type="button">Delete</a></td>
                 </tbody>
-                {% endfor%}
               </table>
+              {%endfor%}
+              {%endif%}
             </div>
           </div>
-          <br />
-          <br />
         </div>
       </div>
     </main>
