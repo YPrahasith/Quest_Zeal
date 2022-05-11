@@ -141,7 +141,7 @@ def studentDashboard():
     if current_user.user == "admin":
         return render_template('page-404.html'), 404
     else :
-        return render_template( 'studentDashboard.html',name = current_user.user , email= current_user.email, temp_tests=temp_tests, students = students)
+        return render_template( 'studentDashboard.html',name = current_user.user , email= current_user.email, temp_tests=temp_tests, students = students, tests=tests)
 
 #Render Tutor Dashboard
 @app.route('/tutorDashboard', methods=['GET', 'POST'])

@@ -14,10 +14,6 @@ tr:nth-child(even) {
     background-color: #dddddd;
 }
 
-.empty {
-    padding: 15px;
-}
-
 .prfname {
     font-size: 35px;
     color: white;
@@ -46,6 +42,7 @@ tr:nth-child(even) {
 .Logout {
     padding-left: 200px;
     float: right;
+    padding-right: 50px;
 }
 
 main>.container {
@@ -69,23 +66,7 @@ main>.container {
     color: white;
 }
 
-.split {
-    height: 100%;
-    width: 95%;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    overflow-x: hidden;
-    padding-top: 20px;
-}
-
-.right {
-    padding-top: 220px;
-    right: 0;
-    padding-right: 150px;
-}
-
-.left {
-    left: 0;
-    padding-top: 250px;
+.maindashboard {
+    padding-top: 70px;
+    padding-left: 100px;
 }
