@@ -45,7 +45,7 @@
 }
 
 .donthaveaccount{
-    color:white ;
+    color:#ff6868 ;
 }
 
 .formtext{
@@ -53,4 +53,17 @@
     margin: 2px;
     font-family: RadioCanada_SemiCondensed-SemiBold;
     color: #524A4A;
+}
+
+.form-floating>.form-control:-webkit-autofill {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#btnclose{
+    padding: 20px;
+}
+
+.modal-content {
+width: 95%;
 }

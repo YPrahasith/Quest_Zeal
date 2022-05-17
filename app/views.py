@@ -113,12 +113,81 @@ def login():
     return render_template( 'login.html', form=form, msg=msg )
 
 # App main route + generic routing
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
 
     try:
+        # Declare the login form
+        loginForm = LoginForm(request.form)
 
-        return render_template( 'index.html' )
+        # Flask message injected into the page, in case of any errors
+        loginMsg = None    
+        # check if both http method is POST and form is valid on submit
+        if loginForm.validate_on_submit():
+       
+            # assign form data to variables
+            username = request.form.get('username', '', type=str)
+            password = request.form.get('password', '', type=str) 
+         
+            # filter User out of database through username
+            user = Users.query.filter_by(user=username).first()
+
+            if user:
+            
+                if bc.check_password_hash(user.password, password):
+                    login_user(user)
+                    if(username =="admin"):
+                        return redirect(url_for('tutorDashboard'))
+                    else :
+                        return redirect(url_for('studentDashboard'))
+                else:
+                    loginMsg = "Wrong password. Please try again."
+            else:
+                loginMsg = "Unknown user"
+        
+         # declare the Registration Form
+        registerForm = RegisterForm(request.form)
+
+        registerMsg     = None
+        success = False
+
+        # if request.method == 'GET': 
+
+        #     return render_template( 'register.html', registerForm=registerForm, registerMsg=registerMsg )
+
+        # check if both http method is POST and form is valid on submit
+        if registerForm.validate_on_submit():
+
+            # assign form data to variables
+            username = request.form.get('username', '', type=str)
+            password = request.form.get('password', '', type=str) 
+            email    = request.form.get('email'   , '', type=str) 
+
+            # filter User out of database through username
+            user = Users.query.filter_by(user=username).first()
+
+            # filter User out of database through username
+            user_by_email = Users.query.filter_by(email=email).first()
+
+            if user or user_by_email:
+                registerMsg = 'Error: User exists!'
+        
+            else:         
+
+                pw_hash = bc.generate_password_hash(password)
+
+                user = Users(username, email, pw_hash)
+
+                user.save()
+
+                registerMsg     = 'User created, please <a href="' + url_for('login') + '">login</a>'     
+                success = True
+
+        else:
+            registerMsg = 'Input error'     
+
+        return render_template( 'index.html', loginForm=loginForm, loginMsg=loginMsg, registerForm=registerForm, registerMsg=registerMsg)
+
     
     except TemplateNotFound:
         return render_template('page-404.html'), 404

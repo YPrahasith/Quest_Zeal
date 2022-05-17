@@ -7,6 +7,12 @@
   <!-- CSS only -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="/static/assets/css/homepage.css">
+  <link rel="stylesheet" href="/static/assets/css/login.css">
+  <!-- CSS only -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </head>
 
@@ -24,13 +30,13 @@
       </div>
       <div class="col-6 col-md-3 d-flex flex-row">
         <div class="px-2">
-          <a href="/" type="button" class="btn homepageButton">Contact</a>
+          <a href="/" type="button" class="btn homepageButton" >Contact</a>
         </div>
         <div class="px-2">
-          <a href="/login" type="button" class="btn homepageButton">Log in</a>
+          <a href="/login" type="button" class="btn homepageButton" data-toggle="modal" data-target="#loginModal">Log in</a>
         </div>
         <div class="px-2">
-          <a href="/register" type="button" class="btn homepageButton">Register</a>
+          <a href="/register" type="button" class="btn homepageButton" data-toggle="modal" data-target="#registerModal">Register</a>
         </div>
       </div>
     </nav>
@@ -48,6 +54,122 @@
         </div>
       </div>
     </div>
+
+    
+    <!-- Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+      
+          <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true" id="btnclose">&times;</span>
+            </button>
+            <form method="post" action="" class="p-1 p-md-4 ">
+                         
+              {{ loginForm.hidden_tag() }}
+              <p class="fw-bold">
+                  {% if msg %}
+                  {{ msg | safe }}
+                  {% else %}
+                  <div class="text logintext text-center">
+                      Log in
+                  </div>
+                  {% endif %}
+                  
+              </p>
+
+              <br />
+                  
+              <label class="formtext">Username</label>
+              <div class="form-floating mb-3" >
+                  {{ loginForm.username(class="form-control") }}
+              </div>
+              <label class="formtext">Password</label>
+              <div class="form-floating mb-3">
+                  {{ loginForm.password(class="form-control", type="password") }}
+                  
+              </div>
+              <br />
+           
+              <button class="w-100 btn btn-lg signin" type="submit">Log in</button>
+              <hr class="my-4">
+              
+                  <div class=" text donthaveaccount">
+                      <p>
+                          Dont have an account? <a href="{{ url_for('register') }}" class="text-right text donthaveaccount" >Register</a>
+                      </p>
+             
+                  </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registeModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="registeModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="col-md-10 mx-auto col-lg-5">
+
+              <form method="post" action="" class="p-4 p-md-5 border rounded-3 bg-light">
+
+                  {{ registerForm.hidden_tag() }}
+
+                  <p class="fw-bold">
+                      {% if msg %}
+                      {{ msg | safe }}
+                      {% else %}
+                      Add your credentials
+                      {% endif %}
+                  </p>
+
+                  <br />
+
+                  <div class="form-floating mb-3">
+                      {{ registerForm.username(class="form-control") }}
+                      <label for="floatingInput">Username</label>
+                  </div>
+
+                  <div class="form-floating mb-3">
+                      {{ registerForm.email(class="form-control") }}
+                      <label for="floatingInput">Email address</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                      {{ registerForm.password(class="form-control", type="password") }}
+                      <label for="floatingPassword">Password</label>
+                  </div>
+                  <br />
+                  <!--
+                  <div class="checkbox mb-3">
+                      <label>
+                          <input type="checkbox" value="agree-terms"> Agree terms
+                      </label>
+                  </div> -->
+                  <button class="w-100 btn btn-lg btn-primary" type="submit">Sign Up</button>
+                  <hr class="my-4">
+                  <small class="text-muted">
+                      Already have an account? <a href="{{ url_for('login') }}" class="text-right">Login</a>
+                  </small>
+              </form>
+          </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
   </main>
 
 

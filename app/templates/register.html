@@ -13,7 +13,28 @@
 <body>
 
     <main>
+        <nav class="navbar navbar-light ">
 
+            <div class="text col-12 col-md-9 px-4">
+                <a class="navbar-brand" href="/">
+                    <img src="/static/assets/images/logo.png" width="30" height="30" class="d-inline-block align-top">
+
+                    Quest Zeal
+
+                </a>
+            </div>
+            <div class="col-6 col-md-3 d-flex flex-row">
+                <div class="px-2">
+                    <a href="/" type="button" class="btn homepageButton">Home</a>
+                </div>
+                <div class="px-2">
+                    <a href="/login" type="button" class="btn homepageButton">Log in</a>
+                </div>
+                <div class="px-2">
+                    <a href="/register" type="button" class="btn homepageButton">Register</a>
+                </div>
+            </div>
+        </nav>
         <div class="container col-xl-10 col-xxl-8 px-4 py-5">
             <div class="row align-items-center g-lg-5 py-5">
                 <div class="col-lg-7 text-center text-lg-start">
@@ -28,7 +49,7 @@
 
                     <form method="post" action="" class="p-4 p-md-5 border rounded-3 bg-light">
 
-                        {{ form.hidden_tag() }}
+                        {{ registerForm.hidden_tag() }}
 
                         <p class="fw-bold">
                             {% if msg %}
@@ -41,16 +62,16 @@
                         <br />
 
                         <div class="form-floating mb-3">
-                            {{ form.username(class="form-control") }}
+                            {{ registerForm.username(class="form-control") }}
                             <label for="floatingInput">Username</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            {{ form.email(class="form-control") }}
+                            {{ registerForm.email(class="form-control") }}
                             <label for="floatingInput">Email address</label>
                         </div>
                         <div class="form-floating mb-3">
-                            {{ form.password(class="form-control", type="password") }}
+                            {{ registerForm.password(class="form-control", type="password") }}
                             <label for="floatingPassword">Password</label>
                         </div>
                         <br />
