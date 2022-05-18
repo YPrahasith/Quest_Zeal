@@ -151,11 +151,6 @@ def index():
         registerMsg     = None
         success = False
 
-        # if request.method == 'GET': 
-
-        #     return render_template( 'register.html', registerForm=registerForm, registerMsg=registerMsg )
-
-        # check if both http method is POST and form is valid on submit
         if registerForm.validate_on_submit():
 
             # assign form data to variables

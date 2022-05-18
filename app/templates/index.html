@@ -56,7 +56,7 @@
     </div>
 
     
-    <!-- Modal -->
+    <!-- Login Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -97,7 +97,7 @@
               
                   <div class=" text donthaveaccount">
                       <p>
-                          Dont have an account? <a href="{{ url_for('register') }}" class="text-right text donthaveaccount" >Register</a>
+                          Dont have an account? <a data-dismiss="modal" data-toggle="modal" data-target="#registerModal"  class="text-right text donthaveaccount" href="">Register</a>
                       </p>
              
                   </div>
@@ -107,20 +107,16 @@
       </div>
     </div>
 
-
+    <!-- Register Modal -->
     <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registeModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="registeModalLabel">Modal title</h5>
+          <div class="modal-body">
+            
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-          </div>
-          <div class="modal-body">
-            <div class="col-md-10 mx-auto col-lg-5">
-
-              <form method="post" action="" class="p-4 p-md-5 border rounded-3 bg-light">
+              <form method="post" action="" class="p-1 p-md-4  ">
 
                   {{ registerForm.hidden_tag() }}
 
@@ -128,43 +124,40 @@
                       {% if msg %}
                       {{ msg | safe }}
                       {% else %}
-                      Add your credentials
+                      <div class="text logintext text-center">
+                        Register
+                    </div>
                       {% endif %}
                   </p>
 
-                  <br />
-
+                  
+                  <label class="formtext">Username</label>
                   <div class="form-floating mb-3">
                       {{ registerForm.username(class="form-control") }}
-                      <label for="floatingInput">Username</label>
                   </div>
 
+                  <label class="formtext">Password</label>
                   <div class="form-floating mb-3">
                       {{ registerForm.email(class="form-control") }}
-                      <label for="floatingInput">Email address</label>
                   </div>
+
+                  <label class="formtext">Password</label>
                   <div class="form-floating mb-3">
                       {{ registerForm.password(class="form-control", type="password") }}
-                      <label for="floatingPassword">Password</label>
                   </div>
                   <br />
-                  <!--
-                  <div class="checkbox mb-3">
-                      <label>
-                          <input type="checkbox" value="agree-terms"> Agree terms
-                      </label>
-                  </div> -->
-                  <button class="w-100 btn btn-lg btn-primary" type="submit">Sign Up</button>
+               
+                  <button class="w-100 btn btn-lg signin" type="submit">Sign Up</button>
                   <hr class="my-4">
-                  <small class="text-muted">
-                      Already have an account? <a href="{{ url_for('login') }}" class="text-right">Login</a>
-                  </small>
+              
+                  <div class=" text donthaveaccount">
+                      <p>
+                          Already have an account? <a data-dismiss="modal" data-toggle="modal" data-target="#loginModal"  class="text-right text donthaveaccount" href="">Login</a>
+                      </p>
+             
+                  </div>
               </form>
-          </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+         
           </div>
         </div>
       </div>

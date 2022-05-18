@@ -88,29 +88,42 @@
                 <p> Performance </p>
               </div>
               <br />
-              <table>
+
+              <table class="table">
                 <thead>
                   <th>Id</th>
+                  <td></td>
                   <th>CourseId</th>
+                  <td></td>
                   <th>CourseName</th>
+                  <td></td>
                   <th>TestName</th>
+                  <td></td>
                   <th>Type</th>
+                  <td></td>
                   <th>Score</th>
-                  <th>#</th>
+                  <td></td>
                 </thead>
-                {% for data in students %}
                 <tbody>
-                  <td>{{data.id}}</td>
-                  <td>{{data.course_id}}</td>
-                  <td>{{data.course_name}}</td>
-                  <td>{{data.test_name}}</td>
-                  <td>{{data.type}}</td>
-                  <td>{{data.score}}</td>
-                  <td><a href="/dlt/{{data.id}}" type="button">Delete</a></td>
+                  {% for data in students %}
+                  <tr>
+                    <td>{{data.id}}</td>
+                    <td></td>
+                    <td>{{data.course_id}}</td>
+                    <td></td>
+                    <td>{{data.course_name}}</td>
+                    <td></td>
+                    <td>{{data.test_name}}</td>
+                    <td></td>
+                    <td>{{data.type}}</td>
+                    <td></td>
+                    <td>{{data.score}}</td>
+                    <td><a href="/dlt/{{data.id}}" type="button">Delete</a></td>
+                  </tr>
+                  {%endfor%}
                 </tbody>
               </table>
               <br />
-              {%endfor%}
               {%endif%}
             </div>
           </div>
