@@ -16,6 +16,7 @@ from app.models import Users, Tests, Students
 from app.forms  import LoginForm, RegisterForm
 from app.QA_Gen_Model import QA_Gen_Model
 from app.Objective_QA_Gen_Model import MCQ_Generator
+from app.QA_Score import QA_Score
 # model = pickle.load(open('app/model.pkl','rb'))
 UPLOAD_FOLDER = 'Uploaded Material'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -228,22 +229,27 @@ def Subjective_QA_Generation(id):
     if request.method == "POST" :
             for i in range(5):
                 response.append(request.form.get(str(i)))
+            data = Tests.query.get(id)
+            path = 'Uploaded Material/'+data.file_name
+            with open(path, 'r') as f:
+                content = f.read()
             
-            score = 0
+            score = QA_Score(content,response)
+            s = Students(course_id=id, course_name=data.course_name, test_name=data.test_name, type = "Subjective", score=score)
+            db.session.add(s)
+            db.session.commit()
+            return redirect(url_for('responses', score=score))
+    else :    
+        if name!="admin" :
+            path = 'Uploaded Material/'+data.file_name
+            with open(path, 'r') as f:
+                content = f.read()
+            que, ans = QA_Gen_Model.generate_test(content)
+            size = len(que)
             
-            print(response)
-            return redirect(url_for('responses', id =id))
-        
-    if name!="admin" :
-        path = 'Uploaded Material/'+data.file_name
-        with open(path, 'r') as f:
-            content = f.read()
-        que, ans = QA_Gen_Model.generate_test(content)
-        size = len(que)
-            
-        return render_template('Subjective_Questions.html', question = que, answer = ans, size = size , id=id)
-    else :
-        return render_template('unAuth.html')
+            return render_template('Subjective_Questions.html', question = que, answer = ans, size = size , id=id)
+        else :
+            return render_template('unAuth.html')
     
 
 #Objective Question Generation
@@ -273,27 +279,22 @@ def Objective_QA_Generation(id):
 @login_required
 def response(id,score):
     name = current_user.user
-    data = Tests.query.get(id)
+    data = Tests.query.get(id) 
     s = Students(course_id=id, course_name=data.course_name, test_name=data.test_name, type = "Objective", score=score)
     db.session.add(s)
     db.session.commit()
     if name !="admin":
-        return render_template('response.html', score=score, name = name, data=data)
+        return render_template('response.html', score=score, name = name)
     else :
         return render_template('unAuth.html')
 
 #responses
-@app.route('/responses/<int:id>')
+@app.route('/responses/<int:score>')
 @login_required
-def responses(id):
+def responses(score):
     name = current_user.user
-    score = 0
-    data = Tests.query.get(id)
-    s = Students(course_id=id, course_name=data.course_name, test_name=data.test_name, type = "Subjective", score=score)
-    db.session.add(s)
-    db.session.commit()
     if name !="admin":
-        return render_template('response.html', score=score, name = name, data=data)
+        return render_template('response.html', name = name, score = score)
     else :
         return render_template('unAuth.html')
 

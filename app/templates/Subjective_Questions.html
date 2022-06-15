@@ -17,6 +17,8 @@
         <div class="col-lg-6 mx-auto">
           <div>
               <form method="post">
+                <br />
+                <br />
                 {% set ns = namespace(count=0) %} {% for i in range(size) %}
                 <label for="{{ ns.count }}"> {{ question[i] }} </label>
                 <br />
@@ -29,8 +31,6 @@
               </form>
           </div>
         </div>
-
-        <!--<button type="button" onclick="qgen()">Submit Answers</button>-->
       </div>
     </main>
   </body>
