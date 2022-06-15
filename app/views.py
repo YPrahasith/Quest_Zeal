@@ -219,20 +219,32 @@ def tutorDashboard():
         return render_template('page-404.html'), 404
 
 
-@app.route('/Subjective_Questions/<int:id>' )
+@app.route('/Subjective_Questions/<int:id>', methods=["GET","POST"])
 @login_required
-def Subjective_QA_Generation(id):
+def Subjective_QA_Generation(id): 
     name = current_user.user
     data = Tests.query.get(id)
+    response = []
+    if request.method == "POST" :
+            for i in range(5):
+                response.append(request.form.get(str(i)))
+            
+            score = 0
+            
+            print(response)
+            return redirect(url_for('responses', id =id))
+        
     if name!="admin" :
         path = 'Uploaded Material/'+data.file_name
         with open(path, 'r') as f:
             content = f.read()
         que, ans = QA_Gen_Model.generate_test(content)
         size = len(que)
+            
         return render_template('Subjective_Questions.html', question = que, answer = ans, size = size , id=id)
     else :
         return render_template('unAuth.html')
+    
 
 #Objective Question Generation
 @app.route('/Objective_QA_Generation/<int:id>')
@@ -240,8 +252,6 @@ def Subjective_QA_Generation(id):
 def Objective_QA_Generation(id):
     name = current_user.user
     data = Tests.query.get(id)
-    if request.method == "POST":
-        print(request.form.get("1"))
     if name!="admin" :
         path = 'Uploaded Material/'+data.file_name
         with open(path, 'r') as f:
@@ -273,10 +283,11 @@ def response(id,score):
         return render_template('unAuth.html')
 
 #responses
-@app.route('/responses/<int:id>/<int:score>')
+@app.route('/responses/<int:id>')
 @login_required
-def responses(id,score):
+def responses(id):
     name = current_user.user
+    score = 0
     data = Tests.query.get(id)
     s = Students(course_id=id, course_name=data.course_name, test_name=data.test_name, type = "Subjective", score=score)
     db.session.add(s)

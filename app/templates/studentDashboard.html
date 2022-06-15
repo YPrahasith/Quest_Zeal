@@ -92,31 +92,21 @@
               <table class="table">
                 <thead>
                   <th>Id</th>
-                  <td></td>
                   <th>CourseId</th>
-                  <td></td>
                   <th>CourseName</th>
-                  <td></td>
                   <th>TestName</th>
-                  <td></td>
                   <th>Type</th>
-                  <td></td>
                   <th>Score</th>
-                  <td></td>
+                  <th> Del </th>
                 </thead>
                 <tbody>
                   {% for data in students %}
                   <tr>
                     <td>{{data.id}}</td>
-                    <td></td>
                     <td>{{data.course_id}}</td>
-                    <td></td>
                     <td>{{data.course_name}}</td>
-                    <td></td>
                     <td>{{data.test_name}}</td>
-                    <td></td>
                     <td>{{data.type}}</td>
-                    <td></td>
                     <td>{{data.score}}</td>
                     <td><a href="/dlt/{{data.id}}" type="button">Delete</a></td>
                   </tr>
