@@ -2,13 +2,17 @@
 <html lang="en">
   <head>
     <title>Quest Zeal - Responses</title>
+
+    
+
+    <link rel="stylesheet" href="/static/assets/css/resp.css" />
   </head>
 
   <body>
     <main>
-      <div class="px-4 py-5 my-5 text-center">
+      <!-- <div class="px-4 py-5 my-5 text-center">
         <p class="lead mb-4">
-          Hello {{name}} your score is {{ score }}
+          Hello {{name}} your score in {{data.course_name }} is {{ score }}
         </p>
         <br />
         <meter id="score_meter" min=0 low=30 high=60 max=100 optimum=80 ></meter>
@@ -16,11 +20,76 @@
       <br />
       <div>
         <a href="/studentDashboard"><button>Go Back Home</button></a>
+      </div>-->
+      <div>
+        <h2 style="text-align:center;color: #004033;"> Your score is : <h2>
+      <div class="gauge">
+        <div class="gauge__body">
+          <div class="gauge__fill"></div>
+          <div class="gauge__cover"></div>
+        </div>
+      </div>
+      <div class="maindashboard">
+        <div>
+          <div>
+            <div class="header2">
+              <p> Performance </p>
+            </div>
+            <br />
+            <table>
+              <thead>
+              </thead>
+              <tbody>
+                <td>Name</td>
+                <td>{{name}}</td>
+              </tbody>
+              <tbody>
+                <td>CourseId</td>
+                <td>{{data.id}}</td>
+              </tbody>
+              <tbody>
+                <td>CourseName</td>
+                <td>{{data.course_name}}</td>
+              </tbody>
+              <tbody>
+                <td>TestName</td>
+                <td>{{data.test_name}}</td>
+              </tbody>
+              <tbody>
+                <td>Score</td>
+                <td>{{score}}</td>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+        <br />
+        <br />
+          <a href="/studentDashboard"> <button>Home</button></a>
+        </div>
+      </div>
       </div>
     </main>
   </body>
 </html>
 <script>
-    
-    document.getElementById('score_meter').setAttribute('value', '{{score}}');
+  const gaugeElement = document.querySelector(".gauge");
+  console.log( {{score}} )
+  var score = {{score}}/100;
+  console.log(score)
+  function setGaugeValue(gauge, value) {
+    if (value < 0 || value > 1) {
+      return;
+    }
+
+    gauge.querySelector(".gauge__fill").style.transform = `rotate(${
+      value / 2
+    }turn)`;
+    gauge.querySelector(".gauge__cover").textContent = `${Math.round(
+      value * 100
+    )}%`;
+  }
+
+
+  setGaugeValue(gaugeElement, score);
 </script>

@@ -1,6 +1,6 @@
 table {
     border-collapse: collapse;
-    width: 100%;
+    width: 90%;
 }
 
 td,
@@ -35,7 +35,7 @@ tr:nth-child(even) {
     background: #FF6868;
     color: white;
     font-size: 22px;
-    width: 100%;
+    width: 90%;
     height: 40px;
 }
 

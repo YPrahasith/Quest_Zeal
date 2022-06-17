@@ -12,18 +12,17 @@
   </head>
   <body>
     <main>
-      <div class="px-4 py-5 my-5 text-center">
+      <div class="px-4" style="padding-top:10px;">
         <h1 class="display-5 fw-bold">Subjective Questions</h1>
-        <div class="col-lg-6 mx-auto">
+        <div class=>
           <div>
               <form method="post">
                 <br />
-                <br />
                 {% set ns = namespace(count=0) %} {% for i in range(size) %}
-                <label for="{{ ns.count }}"> {{ question[i] }} </label>
+                <label for="{{ ns.count }}"> {{ns.count+1}}. {{ question[i] }} </label>
                 <br />
                 <br />
-                <textarea id="{{ ns.count }}" name="{{ ns.count }}"> </textarea>
+                <textarea id="{{ ns.count }}" name="{{ ns.count }}" rows="5" cols="50" placeholder="Enter Your Answer Here"> </textarea>
                 <br />
                 <br />
                 {% set ns.count = ns.count + 1 %} {% endfor %}
@@ -40,25 +39,24 @@
 
 
 <script type="text/javascript">
-  console.log("Executed this");
-  function qgen() {
-    localStorage.clear();
-    var responses = [];
-    var filled = false;
-    for (let i = 0; i <= 2; i++) {
-      var answer = document.getElementById(i);
-      if (answer.value != " ") {
-        filled = true;
-        responses.push(answer.value);
+    /* Get the documentElement (<html>) to display the page in fullscreen */
+    var elem = document.documentElement;
+    var elem = document.documentElement; 
+    if (elem.requestFullscreen) { 
+      elem.requestFullscreen() 
+    }
+    console.log("Executing")
+    openFullscreen();
+    
+    /* View in fullscreen */
+    function openFullscreen() {
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
       }
     }
-    console.log(responses);
     
-
-    var score = 0;
-    if (!filled) {
-      alert("Please fill all entries");
-    }
-    location.replace("/responses/{{id}}/" + parseInt(score));
-  }
 </script>

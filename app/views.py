@@ -227,7 +227,7 @@ def Subjective_QA_Generation(id):
     data = Tests.query.get(id)
     response = []
     if request.method == "POST" :
-            for i in range(5):
+            for i in range(3):
                 response.append(request.form.get(str(i)))
             data = Tests.query.get(id)
             path = 'Uploaded Material/'+data.file_name
@@ -238,7 +238,7 @@ def Subjective_QA_Generation(id):
             s = Students(course_id=id, course_name=data.course_name, test_name=data.test_name, type = "Subjective", score=score)
             db.session.add(s)
             db.session.commit()
-            return redirect(url_for('responses', score=score))
+            return redirect(url_for('responses', score=score, id=id))
     else :    
         if name!="admin" :
             path = 'Uploaded Material/'+data.file_name
@@ -284,17 +284,18 @@ def response(id,score):
     db.session.add(s)
     db.session.commit()
     if name !="admin":
-        return render_template('response.html', score=score, name = name)
+        return render_template('response.html', score=score, name = name, data= data)
     else :
         return render_template('unAuth.html')
 
 #responses
-@app.route('/responses/<int:score>')
+@app.route('/responses/<int:score>/<int:id>')
 @login_required
-def responses(score):
+def responses(score, id):
     name = current_user.user
+    data = Tests.query.get(id)
     if name !="admin":
-        return render_template('response.html', name = name, score = score)
+        return render_template('response.html', name = name, score = score, data = data)
     else :
         return render_template('unAuth.html')
 

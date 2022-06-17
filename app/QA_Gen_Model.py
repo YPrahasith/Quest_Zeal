@@ -48,7 +48,7 @@ class QA_Gen_Model():
         keyword_list = list(question_answer_dict.keys())
         question_answer = list()
         
-        for _ in range(5):
+        for _ in range(3):
             rand_num = np.random.randint(0, len(keyword_list))
             selected_key = keyword_list[rand_num]
             answer = question_answer_dict[selected_key]
@@ -58,7 +58,7 @@ class QA_Gen_Model():
         
         que = list()
         ans = list()
-        while len(que) < 5 :
+        while len(que) < 3 :
             rand_num = np.random.randint(0, len(question_answer))
             if question_answer[rand_num]["Question"] not in que:
                 que.append(question_answer[rand_num]["Question"])
