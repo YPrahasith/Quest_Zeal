@@ -1,0 +1,12 @@
+﻿Endpoint Security received the AV-TEST awards for the best performance, protection, and usability for a corporate endpoint security product in 2021. In all tests  Endpoint Security showed outstanding performance, protection, and usability for businesses.
+Corporate Cyber Security Services
+TrojansA type of malware that is disguised as legitimate software. Cybercriminals trick users into uploading Trojans onto their computer where they cause damage or collect data.
+There are a number of different types of malware, including:
+Virus: A self-replicating program that attaches itself to clean file and spreads throughout a computer system, infecting files with malicious code.
+In February 2020, the FBI warned U.S. citizens to be aware of confidence fraud that cybercriminals commit using dating sites, chat rooms and apps. Perpetrators take advantage of people seeking new partners, duping victims into giving away personal data.
+
+
+With the scale of the cyber threat set to continue to rise, the International Data Corporation predicts that worldwide spending on cyber-security solutions will reach a massive $133.7 billion by 2022. Governments across the globe have responded to the rising cyber threat with guidance to help organizations implement effective cyber-security practices.
+A denial-of-service attack is where cybercriminals prevent a computer system from fulfilling legitimate requests by overwhelming the networks and servers with traffic. This renders the system unusable, preventing an organization from carrying out vital functions.
+A man-in-the-middle attack is a type of cyber threat where a cybercriminal intercepts communication between two individuals in order to steal data. For example, on an unsecure WiFi network, an attacker could intercept data being passed from the victims device and the network.
+Electronic security protocols also focus on real-time malware detection. Many use heuristic and behavioral analysis to monitor the behavior of a program and its code to defend against viruses or Trojans that change their shape with each execution (polymorphic and metamorphic malware). Security programs can confine potentially malicious programs to a virtual bubble separate from a users network to analyze their behavior and learn how to better detect new infections.

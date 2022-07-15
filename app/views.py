@@ -262,7 +262,7 @@ def Objective_QA_Generation(id):
         path = 'Uploaded Material/'+data.file_name
         with open(path, 'r') as f:
             content = f.read()
-        Objective_Questions = MCQ_Generator.generate_mcq_questions(content, 2)
+        Objective_Questions = MCQ_Generator.generate_mcq_questions(content, 9)
         answers = []
         for questions in Objective_Questions:
             questions.distractors.append(questions.answerText)
